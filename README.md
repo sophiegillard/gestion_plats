@@ -1,2 +1,2 @@
-# crud_table
+# Gestion des plats
 crud table
