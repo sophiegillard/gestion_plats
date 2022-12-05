@@ -513,14 +513,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.block {
-  display: block;
-}
-
-.flex {
-  display: flex;
-}
-
 .table {
   display: table;
 }
@@ -541,20 +533,6 @@ video {
   display: table-row;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
 .text-left {
   text-align: left;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
