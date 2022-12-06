@@ -2,20 +2,21 @@ import edit from "../../public/assets/edit.png"
 import add from "../../public/assets/add.png"
 import { AddDish } from "./AddDish"
 import { useState, useEffect } from "react";
-import { getAllDatas } from "../utils/getAllDatas";
+import { fetchDatas } from "../utils/fetchDatas";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
     const [isModalOpen, SetModalOpen] = useState(false)
      
     useEffect(() => {
-        getAllDatas (setDatas);
+        const url= 'http://localhost:8888/api/index.php'
+        fetchDatas (setDatas,'http://localhost:8888/api/index.php');
     }, []);
 
     
     return (
         <>
-        <AddDish isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} />        
+        <AddDish isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} />        
         <main className="flex flex-col justify-center place-items-center">
 
             <div className="table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-[90%] place-items-center">

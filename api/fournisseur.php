@@ -9,7 +9,7 @@ $conn = $db->connect();
 $method = $_SERVER['REQUEST_METHOD'];
 switch($method) {
     case "GET":
-        $sql = "SELECT nomFrn FROM fournisseur";
+        $sql = "SELECT * FROM fournisseur";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);

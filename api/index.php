@@ -17,8 +17,22 @@ switch($method) {
         print_r(json_encode($datas));
         break;
 
-    // case "POST":
-    //     $datas = json_decode(file_get_contents('php://input'));
+        case "POST":
+            $datas = json_decode(file_get_contents('php://input'));
+            // $sql = "INSERT INTO `plat` (`id`, `libellee`, `prix`, `fournisseur`, `categorie`) VALUES (NULL, :libellee, :prix, :fournisseur, :categorie)";
+            $sql = "INSERT INTO `plat` (`id`, `libellee`, `prix`, `fournisseur`, `categorie`) VALUES (NULL, :libellee, :prix, (SELECT id from fournisseur WHERE nomFrn = :fournisseur), (SELECT id from categories WHERE nomCat = :categorie))" ;
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':libellee', $datas->libellee);
+            $stmt->bindParam(':prix', $datas->prix);
+            $stmt->bindParam(':fournisseur', $datas->fournisseur);
+            $stmt->bindParam(':categorie', $datas->categorie);
+            if($stmt->execute()) {
+                $data = ['status' => 1, 'message' => "Record successfully created"];
+            } else {
+                $data = ['status' => 0, 'message' => "Failed to create record."];
+            }
+            echo json_encode($data);
+            break;
 
 }
 ?>

@@ -1,11 +1,24 @@
 import close from "../../public/assets/close.png"
 import {useState, useEffect} from "react";
 import { useRef } from "react";
+import { fetchDatas } from "../utils/fetchDatas";
 import axios from "axios";
+
+
 
 export const AddDish = ({isModalOpen, SetModalOpen}) =>{
 
+    const [categories, setCategories] = useState([])
+    const [fournisseurs, setFournisseurs] = useState([])
     const [inputs, setInputs] = useState({})
+  
+
+    useEffect(() => {
+        const urlCategory= 'http://localhost:8888/api/category.php'
+        const urlFournisseur= 'http://localhost:8888/api/fournisseur.php'
+        fetchDatas (setCategories, urlCategory);
+        fetchDatas (setFournisseurs, urlFournisseur);
+    }, []);
 
     const dishName = useRef();
     const dishProvider = useRef()
@@ -20,36 +33,20 @@ export const AddDish = ({isModalOpen, SetModalOpen}) =>{
         const cat = dishCat.current.value;
         const price = dishPrice.current.value;
 
-        const newInputs= {'libellee': name, 'fournisseur' : provider, 'categorie': cat, 'price': price}
 
-        setInputs(newInputs)
-
-    
-
-        // Make a request for a user with a given ID
-        axios.get('http://localhost:8888/api/')
-        .then(function (response) {
-            // handle success
-            console.log(response.data);
-            const datas = response.data
-            datas.map(data =>(console.log(data)))
-            return datas;
-        })
-        .catch(function (error) {
-            // handle error
+        axios.post('http://localhost:8888/api/index.php', {
+            libellee: name,
+            prix: price,
+            fournisseur : provider, 
+            categorie : cat
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
             console.log(error);
-        })
-        .then(function () {
-            // always executed
-        });
+          });
 
-
-        console.log(name, provider, cat, price)
-        console.log(inputs);
-
-
-        // axios.post('http://localhost:8888/api/user/save', inputs)
-        // console.log(inputs)
     }
 
     return <>
@@ -74,23 +71,29 @@ export const AddDish = ({isModalOpen, SetModalOpen}) =>{
 
                 <p className="flex flex-col gap-2">
                     <label>Famille du plat </label>
-                        <select ref={dishProvider} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
+                        <select ref={dishCat} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
                             <option value="default">Veuillez selectionner une famille de plat</option>
-                            <option>Brine shrimp</option>
-                            <option>Red panda</option>
-                            <option>Spider monkey</option>
+                            {categories.map((category)=>
+                                <option key={category.nomCat}>{category.nomCat}</option>
+                            )}
                         </select>
                 </p>
 
+
+
                 <p className="flex flex-col gap-2">
                     <label>Fournisseur</label>
-                            <select ref={dishCat} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
+                            <select ref={dishProvider} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
+                                
                                 <option value="default">Veuillez selectionner un fournisseur</option>
-                                <option>Brine shrimp</option>
-                                <option>Red panda</option>
-                                <option>Spider monkey</option>
+                                {fournisseurs.map((fournisseur)=>
+                                    <option key={fournisseur.nomFrn}>{fournisseur.nomFrn}</option>
+                                )}
+
                             </select>
                 </p>
+
+
 
                 <p className="flex flex-col">
                     <label>Prix </label>
