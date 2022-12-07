@@ -1,6 +1,7 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: *");
+    header( "Access-Control-Allow-Methods: GET,PUT,POST,DELETE,PATCH,OPTIONS");
 
     include 'DbConnection.php';
 $db = new DbConnection;
@@ -32,6 +33,20 @@ switch($method) {
                 $data = ['status' => 0, 'message' => "Failed to create record."];
             }
             echo json_encode($data);
+            break;
+
+        case "DELETE":
+            $sql = "DELETE FROM `plat` WHERE `plat`.`id` = :id " ;
+            $path = explode('/', $_SERVER['REQUEST_URI']);
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':id', $path[3]);
+            if($stmt->execute()) {
+                $response = ['status' => 1, 'message' => 'Record deleted successfully.'];
+            } else {
+                $response = ['status' => 0, 'message' => 'Failed to delete record.'];
+            }
+            echo json_encode($response);
             break;
 
 }

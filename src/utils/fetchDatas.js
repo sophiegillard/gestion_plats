@@ -6,6 +6,7 @@ export const fetchDatas = (setDatas, url) =>{
     .then(function (response) {
         // handle success
         setDatas(response.data)
+
     })
     .catch(function (error) {
         // handle error

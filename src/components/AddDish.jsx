@@ -10,7 +10,6 @@ export const AddDish = ({isModalOpen, SetModalOpen}) =>{
 
     const [categories, setCategories] = useState([])
     const [fournisseurs, setFournisseurs] = useState([])
-    const [inputs, setInputs] = useState({})
   
 
     useEffect(() => {
@@ -26,27 +25,23 @@ export const AddDish = ({isModalOpen, SetModalOpen}) =>{
     const dishPrice = useRef();
 
     const handleSubmit = (e) =>{
-        
-
         const name = dishName.current.value;
         const provider = dishProvider.current.value;
         const cat = dishCat.current.value;
         const price = dishPrice.current.value;
 
-
         axios.post('http://localhost:8888/api/index.php', {
             libellee: name,
             prix: price,
-            fournisseur : provider, 
+            fournisseur : provider,
             categorie : cat
-          })
-          .then(function (response) {
+            })
+            .then(function (response) {
             console.log(response);
-          })
-          .catch(function (error) {
+            })
+            .catch(function (error) {
             console.log(error);
-          });
-
+            });
     }
 
     return <>
