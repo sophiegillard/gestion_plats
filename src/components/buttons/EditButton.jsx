@@ -1,4 +1,4 @@
-import edit from "../../public/assets/edit.png";
+import edit from "../../../public/assets/edit.png";
 
 export const EditButton = ({setEditModal}, idButton) =>{
 

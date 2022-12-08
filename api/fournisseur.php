@@ -7,18 +7,17 @@ $db = new DbConnection;
 $conn = $db->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
-switch($method) {
-    case "GET":
+
         $sql = "SELECT * FROM fournisseur";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        print_r(json_encode($datas));
-        break;
+        $modifiedData = array_map(function($item) {
+            $item["nom"] = $item["nomFrn"];
+            unset($item["nomFrn"]);
+            return $item;
+        }, $datas);
 
-    // case "POST":
-    //     $datas = json_decode(file_get_contents('php://input'));
-
-}
+        print_r(json_encode($modifiedData));
 ?>

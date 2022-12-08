@@ -1,12 +1,13 @@
 import add from "../../public/assets/add.png"
-import { AddDish } from "./AddDish"
+import { AddDish } from "./modal/AddDish.jsx"
 import { useState, useEffect } from "react";
 import { fetchDatas } from "../utils/fetchDatas";
-import { DeleteButton } from './DeleteButton'
-import {EditButton} from "./EditButton.jsx";
-import {EditModal} from "./EditModal.jsx";
-import {ConfirmationDeleteModal} from "./ConfirmationDeleteModal";
+import { DeleteButton } from './buttons/DeleteButton.jsx'
+import {EditButton} from "./buttons/EditButton.jsx";
+import {EditModal} from "./modal/EditModal.jsx";
+import {ConfirmationDeleteModal} from "./modal/ConfirmationDeleteModal.jsx";
 import {isCheckbox} from "../utils/isCheckbox.js";
+import {ActionButton} from "./buttons/ActionButton.jsx";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -44,7 +45,7 @@ export const Table = () =>{
             isDeleteModal={isDeleteModal}
             setDeleteModal = {setDeleteModal}
             />
-        <AddDish isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} />
+        <AddDish isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
         <EditModal editModal={editModal} setEditModal={setEditModal} setDatas={setDatas} datas={datas} />
 
 
@@ -56,12 +57,15 @@ export const Table = () =>{
                 <div className="flex flex-row gap-4">
                     
                     {checkIfCheckBoxAreCheck.length === 0  ? null : <DeleteButton setDeleteModal={setDeleteModal}/>}
-                    
-                    <button type="submit" onClick={() => SetModalOpen(true)}
-                    className="bg-green-button rounded-sm shadow-lg text-white px-4 py-2 flex flex-row gap-2 justify-center place-items-center">
-                    <span>Ajouter</span>
-                    <img src={add} alt="icon ajouter" className="h-4 w-4"/>
-                    </button>
+
+                    <ActionButton
+                        onClickAction={()=>SetModalOpen(true)}
+                        label={'Ajouter'}
+                        isIconNeeded={true}
+                        image={add}
+                        altImg={'icon ajouter'}
+                        bgColor={'bg-green-button'} />
+
                 </div>
 
             </div>

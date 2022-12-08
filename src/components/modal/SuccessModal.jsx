@@ -1,4 +1,5 @@
-import success from "../../public/assets/success.png"
+import success from "../../../public/assets/success.png"
+import {ActionButton} from "../buttons/ActionButton";
 
 export const SuccessModal = ({modalState, action, successMessage}) => {
 
@@ -9,7 +10,7 @@ export const SuccessModal = ({modalState, action, successMessage}) => {
         className="shadow-xl backdrop-blur min-w-[30%] text-font-main
          justify-center items-center p-8 gap-6">
 
-            <form action="" method="dialog" className="text-font-main flex flex-col justify-center items-center p-8 gap-6">
+            <form action="src/components/modal/SuccessModal.jsx" method="dialog" className="text-font-main flex flex-col justify-center items-center p-8 gap-6">
 
                 <img src={success} alt="opération réussie image" className="w-24"/>
 
@@ -18,11 +19,7 @@ export const SuccessModal = ({modalState, action, successMessage}) => {
                     <p>{successMessage}</p>
                 </div>
 
-                <button
-                    onClick={action}
-                    className="bg-purple-button text-white px-4 py-2 rounded-sm shadow-md">
-                    OK
-                </button>
+                <ActionButton label={'OK'} bgColor={'bg-purple-button'} onClickAction={action}/>
 
             </form>
 

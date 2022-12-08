@@ -1,5 +1,5 @@
-import trash from "../../public/assets/delete.png"
-import {ConfirmationDeleteModal} from "./ConfirmationDeleteModal";
+import trash from "../../../public/assets/delete.png"
+import {ConfirmationDeleteModal} from "../modal/ConfirmationDeleteModal.jsx";
 
 export const DeleteButton = ({ setDeleteModal }) =>{
 

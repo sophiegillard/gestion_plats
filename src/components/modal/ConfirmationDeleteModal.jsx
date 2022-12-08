@@ -1,8 +1,8 @@
-import attention from "../../public/assets/attention.png"
+import attention from "../../../public/assets/attention.png"
 import axios from "axios";
 import {useState} from "react";
-import {SuccessModal} from "./SuccessModal";
-import {deleteDataByID} from "../utils/deleteDataById.js";
+import {SuccessModal} from "./SuccessModal.jsx";
+import {deleteDataByID} from "../../utils/deleteDataById.js";
 
 export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDeleteModal, datas}) =>{
 
@@ -18,7 +18,7 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
                 open={isDeleteModal}
                 className="shadow-xl backdrop-blur min-w-[30%]">
 
-            <form action="" method="dialog" className="text-font-main flex flex-col justify-center items-center p-8 gap-6">
+            <form action="src/components/modal/ConfirmationDeleteModal.jsx" method="dialog" className="text-font-main flex flex-col justify-center items-center p-8 gap-6">
 
                 <img src={attention} alt="opération réussie image" className="w-24"/>
 

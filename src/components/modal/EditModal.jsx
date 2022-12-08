@@ -1,7 +1,9 @@
-import close from "../../public/assets/close.png";
+import close from "../../../public/assets/close.png";
 import {useEffect, useRef, useState} from "react";
-import {fetchDatas} from "../utils/fetchDatas.js";
+import {fetchDatas} from "../../utils/fetchDatas.js";
 import axios from "axios";
+import {CloseButton} from "../modalComponents/CloseButton.jsx";
+import {TextInputModal} from "../modalComponents/TextInputModal.jsx";
 
 export const EditModal = ({editModal, setEditModal}) =>{
 
@@ -55,22 +57,17 @@ export const EditModal = ({editModal, setEditModal}) =>{
     return <>
         <dialog modal-mode="mega" open={editModal}
                 className="shadow-xl backdrop-blur p-0 min-w-[50%] text-font-main">
-            <form action="" method="dialog" className="">
+            <form action="src/components/modal/EditModal.jsx" method="dialog" className="">
 
+                {/*Header Modal*/}
                 <div className="flex justify-between border-b-2 p-4">
                     <h3 className="text-xl">Modification d'un plat</h3>
-                    <button>
-                        <img src={close} alt="close button" className="h-4"
-                             onClick={() => setEditModal(false)}/>
-                    </button>
+                    <CloseButton onClickAction={() => setEditModal(false)} />
                 </div>
+                {/*End Header Modal*/}
 
                 <div className="px-4 flex flex-col gap-4 my-4">
-                    <p className="flex flex-col gap-2">
-                        <label>Libellé du plat</label>
-                        <input type="text" ref={dishName}
-                               className="border-light-grey border-2 rounded-sm px-3 py-1"></input>
-                    </p>
+                    <TextInputModal label={'Libellé du plat'} forwardRef={dishName} />
 
                     <p className="flex flex-col gap-2">
                         <label>Famille du plat </label>

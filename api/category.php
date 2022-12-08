@@ -13,5 +13,11 @@ $method = $_SERVER['REQUEST_METHOD'];
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        print_r(json_encode($datas));
+        $modifiedData = array_map(function($item) {
+            $item["nom"] = $item["nomCat"];
+            unset($item["nomCat"]);
+            return $item;
+        }, $datas);
+
+        print_r(json_encode($modifiedData));
 ?>
