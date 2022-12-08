@@ -13,7 +13,8 @@ module.exports = {
         'green-button':'#28a745',
         'purple-button':'#7367f0',
         'light-grey':'#ecf0f1',
-        'font-main':'#212121'
+        'font-main':'#212121',
+        'medium-grey':'#d1d3d3',
       },
     },
   },
