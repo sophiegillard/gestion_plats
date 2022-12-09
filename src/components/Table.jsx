@@ -1,6 +1,6 @@
 import add from "../../public/assets/add.png"
-import { AddDish } from "./modal/AddDish.jsx"
-import { useState, useEffect } from "react";
+import { AddDishModal } from "./modal/AddDishModal.jsx"
+import {useState, useEffect, useRef} from "react";
 import { fetchDatas } from "../utils/fetchDatas";
 import { DeleteButton } from './buttons/DeleteButton.jsx'
 import {EditButton} from "./buttons/EditButton.jsx";
@@ -8,6 +8,7 @@ import {EditModal} from "./modal/EditModal.jsx";
 import {ConfirmationDeleteModal} from "./modal/ConfirmationDeleteModal.jsx";
 import {isCheckbox} from "../utils/isCheckbox.js";
 import {ActionButton} from "./buttons/ActionButton.jsx";
+import {handleCheckboxChange} from "../utils/handleCheckboxChange.js";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -15,49 +16,44 @@ export const Table = () =>{
     const [isBoxChecked, setBoxChecked] = useState(false)
     const [editModal, setEditModal] = useState (false)
     const [isDeleteModal, setDeleteModal] = useState(false)
+    const [selectedId, setSelectedId] = useState('')
 
     let checkIfCheckBoxAreCheck = isCheckbox();
-    console.log(checkIfCheckBoxAreCheck.length)
-
-    const handleCheckBox = event => {
-        if (event.target.checked) {
-          setBoxChecked(true);
-        } else {
-          setBoxChecked(false);
-        }
-      };
      
     useEffect(() => {
         const url= 'http://localhost:8888/api/index.php'
         fetchDatas (setDatas,url);
     }, []);
 
-    /*console.log(datas)
-    let idFound = window.addEventListener('click', (e)=>console.log(e.target.parentNode.parentNode.parentNode.id))
 
-    idFound
-    */
+
     return (
         <>
+   {/*     To be moved to deleteButton?    */}
         <ConfirmationDeleteModal
             warning = {'Attention'}
             message={"Etes-vous sûr de vouloir supprimer définitivement l'élément?"}
             isDeleteModal={isDeleteModal}
             setDeleteModal = {setDeleteModal}
+            setDatas={setDatas}
             />
-        <AddDish isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
-        <EditModal editModal={editModal} setEditModal={setEditModal} setDatas={setDatas} datas={datas} />
 
+        {/*   Modals  */}
+        <AddDishModal isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
+        <EditModal editModal={editModal} setEditModal={setEditModal} setDatas={setDatas} datas={datas} selectedId={selectedId}/>
 
             <main className="flex flex-col justify-center place-items-center">
 
-            <div className="table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-[90%] place-items-center">
+            <header className="table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-[90%] place-items-center">
+
                 <h2 className="table__title ">Gestion des plats</h2>
 
                 <div className="flex flex-row gap-4">
-                    
-                    {checkIfCheckBoxAreCheck.length === 0  ? null : <DeleteButton setDeleteModal={setDeleteModal}/>}
 
+                    {/*  Show Delete Button only if one or more boxes are checked  */}
+                    {checkIfCheckBoxAreCheck.length === 0  ? null : <DeleteButton action={()=>setDeleteModal(true)} />}
+
+                    {/* Button to open Add Dish Modal */}
                     <ActionButton
                         onClickAction={()=>SetModalOpen(true)}
                         label={'Ajouter'}
@@ -68,8 +64,9 @@ export const Table = () =>{
 
                 </div>
 
-            </div>
+            </header>
 
+            {/*  Table  */}
             <div className="table w-[90%] border-collapse"> 
                 <div className="table__container table w-full text-center">
 
@@ -92,7 +89,8 @@ export const Table = () =>{
 
                                 <input type="checkbox"
                                 value={data.id}
-                                onChange={handleCheckBox}
+                                onChange={() => handleCheckboxChange(setDatas, datas, data.id)}
+                                checked={!data.checked}
                                 ></input>
 
                                 <div className="table-cell align-middle">{data.libellee}</div>
@@ -103,8 +101,9 @@ export const Table = () =>{
 
                                 <div className="table-cell align-middle">{data.prix}</div>
 
-                                <div className="table-cell align-middle">
-                                    <EditButton setEditModal={setEditModal} />
+                                <div className="table-cell align-middle" >
+                                    <EditButton action={()=>{
+                                        setEditModal(true), setSelectedId(data.id)}} idButton={data.id} />
                                 </div>
 
                             </div>

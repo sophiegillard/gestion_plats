@@ -10,7 +10,7 @@ import {SuccessModal} from "./SuccessModal.jsx";
 
 
 
-export const AddDish = ({isModalOpen, SetModalOpen, setDatas, datas}) =>{
+export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
 
 /*    Declaration of the useState*/
     const [categories, setCategories] = useState([])
@@ -45,8 +45,8 @@ export const AddDish = ({isModalOpen, SetModalOpen, setDatas, datas}) =>{
                 categorie : cat
             })
                 .then(function (response) {
-                  /*  setDatas((datas) => [...datas, response]);*/
-                    console.log(response.data);
+                    const url= 'http://localhost:8888/api/index.php'
+                    fetchDatas (setDatas,url);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -65,12 +65,14 @@ export const AddDish = ({isModalOpen, SetModalOpen, setDatas, datas}) =>{
 
     <dialog modal-mode="mega" open={isModalOpen}
     className="shadow-xl backdrop-blur p-0 min-w-[50%] text-font-main">
-        <form action="src/components/modal/AddDish.jsx" method="dialog" className="" onSubmit={(e)=>handleSubmit(e)}>
+        <form action="src/components/modal/AddDishModal.jsx" method="dialog" className="" onSubmit={(e)=>handleSubmit(e)}>
 
+            {/*Header Modal*/}
             <div className="flex justify-between border-b-2 p-4">
                 <h3 className="text-xl">Ajout d'un plat</h3>
                 <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
             </div>
+            {/*End Header Modal*/}
 
             <div className="px-4 flex flex-col gap-4 my-4">
 

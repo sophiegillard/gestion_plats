@@ -4,14 +4,14 @@ import {useState} from "react";
 import {SuccessModal} from "./SuccessModal.jsx";
 import {deleteDataByID} from "../../utils/deleteDataById.js";
 
-export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDeleteModal, datas}) =>{
+export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDeleteModal, setDatas}) =>{
 
     const [successDeleteModal, setSuccessDeleteModal] = useState(false)
 
     return <>
         <SuccessModal
             modalState={successDeleteModal}
-            action={deleteDataByID({datas})}
+            action={()=>deleteDataByID({setDatas})}
             successMessage={'Le plat a été supprimé avec succès.'}/>
 
         <dialog modal-mode="mini"

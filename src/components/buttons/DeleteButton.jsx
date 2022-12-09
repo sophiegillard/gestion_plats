@@ -1,10 +1,9 @@
 import trash from "../../../public/assets/delete.png"
-import {ConfirmationDeleteModal} from "../modal/ConfirmationDeleteModal.jsx";
 
-export const DeleteButton = ({ setDeleteModal }) =>{
+export const DeleteButton = ({ action }) =>{
 
     return <>
-    <button type="submit" onClick={()=>setDeleteModal(true)}
+    <button type="submit" onClick={action}
                     className="bg-red-button rounded-sm shadow-lg text-white px-4 py-2 flex flex-row gap-2 justify-center place-items-center">
                     <span>Supprimer</span>
                     <img src={trash} alt="icon ajouter" className="h-4 w-4"/>

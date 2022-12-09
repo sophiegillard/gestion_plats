@@ -4,12 +4,16 @@ import {fetchDatas} from "../../utils/fetchDatas.js";
 import axios from "axios";
 import {CloseButton} from "../modalComponents/CloseButton.jsx";
 import {TextInputModal} from "../modalComponents/TextInputModal.jsx";
+import {SelectInputModal} from "../modalComponents/SelectInputModal.jsx";
+import {NumberInputModal} from "../modalComponents/NumberInputModal.jsx";
 
-export const EditModal = ({editModal, setEditModal}) =>{
+export const EditModal = ({editModal, setEditModal, setDatas, datas, selectedId}) =>{
 
     const [inputs, setInputs] = useState('')
     const [categories, setCategories] = useState([])
     const [fournisseurs, setFournisseurs] = useState([])
+
+    let itemToEdit = '';
 
 
     useEffect(() => {
@@ -25,10 +29,21 @@ export const EditModal = ({editModal, setEditModal}) =>{
         fetchDatas (setFournisseurs, urlFournisseur);
     }, []);
 
+
     const dishName = useRef('test');
     const dishProvider = useRef()
     const dishCat = useRef();
     const dishPrice = useRef();
+
+    const handleNewValues = (item, e, newValue) =>{
+        console.group()
+        const tt = item.current.value
+        console.log(e.target.value)
+        console.groupEnd()
+        newValue = tt
+
+
+    }
 
     const handleSubmit = (e) =>{
         const name = dishName.current.value;
@@ -53,6 +68,34 @@ export const EditModal = ({editModal, setEditModal}) =>{
 /*    let pp = document.querySelectorAll('.row-content')
     console.log(pp)*/
 
+    const handleSelectedElem = (idToFind, array) =>{
+        array.map(item =>{
+            if(item.id === idToFind) {
+                itemToEdit = item;
+                console.log(itemToEdit)
+                return itemToEdit;
+            }
+        })
+    }
+
+    handleSelectedElem ( selectedId, datas )
+
+    const isItemToEdit = () => {
+        let idItemToEdit = '';
+        let allItems = document.querySelectorAll('.edit-button')
+        allItems.forEach(item =>{
+            console.log(item)
+            /*
+            if (row.firstChild.checked){
+                arrayIds.push(row.id)
+                console.log(arrayIds)
+            }*/
+        })
+        return idItemToEdit;
+    }
+
+
+
 
     return <>
         <dialog modal-mode="mega" open={editModal}
@@ -66,45 +109,39 @@ export const EditModal = ({editModal, setEditModal}) =>{
                 </div>
                 {/*End Header Modal*/}
 
-                <div className="px-4 flex flex-col gap-4 my-4">
-                    <TextInputModal label={'Libellé du plat'} forwardRef={dishName} />
+                    {datas.map(data =>{
+                        if(data.id === selectedId){
+                            return(
+                            <div className="px-4 flex flex-col gap-4 my-4">
 
-                    <p className="flex flex-col gap-2">
-                        <label>Famille du plat </label>
-                        <select ref={dishCat} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
-                            <option value="default">Veuillez selectionner une famille de plat</option>
-                            {categories.map((category)=>
-                                <option key={category.nomCat}>{category.nomCat}</option>
-                            )}
-                        </select>
-                    </p>
+                            <TextInputModal label={'Libellé du plat'}
+                                            forwardRef={dishName}
+                                            value={data.libellee}
+                                            onChangeAction={(e)=>handleNewValues(dishName, e, data.libellee)}/>
 
+                            <SelectInputModal label={'Famille du plat'}
+                                              forwardRef={dishCat}
+                                              optionText={'Veuillez selectionner une famille de plat'}
+                                              arrayToDisplay={categories}
+                                              value={data.nomCat}
+                            />
 
+                            <SelectInputModal label={'Fournisseur'}
+                                              forwardRef={dishProvider}
+                                              optionText={'Veuillez selectionner un fournisseur'}
+                                              arrayToDisplay={fournisseurs}
+                                              value={data.nomFrn}
+                            />
 
-                    <p className="flex flex-col gap-2">
-                        <label>Fournisseur</label>
-                        <select ref={dishProvider} className="border-light-grey border-2 rounded-sm px-3 py-1 bg-transparent">
+                            <NumberInputModal label={'Prix'} forwardRef={dishPrice} value={data.prix} />
 
-                            <option value="default">Veuillez selectionner un fournisseur</option>
-                            {fournisseurs.map((fournisseur)=>
-                                <option key={fournisseur.nomFrn}>{fournisseur.nomFrn}</option>
-                            )}
-
-                        </select>
-                    </p>
-
-
-
-                    <p className="flex flex-col">
-                        <label>Prix </label>
-                        <input type="number" min="0" max="100" placeholder="0" ref={dishPrice}
-                               className="w-1/2 border-light-grey border-2 rounded-sm px-3 py-1 text-center"></input>
-                    </p>
-                </div>
+                            </div>)
+                        }
+                    })}
 
                 <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
                     <button type="submit" value="cancel">Annuler</button>
-                    <button type="submit" onClick={()=>handleSubmit()}
+                    <button type="submit" onClick={()=>isItemToEdit()}
                             className="bg-green-button rounded-sm shadow-lg text-white px-4 p-1">Enregistrer les modifications</button>
                 </div>
 

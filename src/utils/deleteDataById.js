@@ -1,15 +1,18 @@
 import axios from "axios";
 import {isCheckbox} from "./isCheckbox.js";
+import {fetchDatas} from "./fetchDatas.js";
 
-export const deleteDataByID = () => {
+export const deleteDataByID = ({setDatas}) => {
     let arrayIds =  isCheckbox()
 
     arrayIds.forEach(id =>{
-        /*axios.delete(`http://localhost:8888/api/index.php/${id}`)
+        axios.delete(`http://localhost:8888/api/index.php/${id}`)
             .then(function(response){
-                console.log(response.data);
-            })*/
-        console.log(arrayIds)
-        console.log('the array has been deleted' + arrayIds)
+                const url= 'http://localhost:8888/api/index.php'
+                fetchDatas (setDatas,url);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     })
 }

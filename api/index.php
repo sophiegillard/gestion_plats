@@ -10,7 +10,7 @@ $conn = $db->connect();
 $method = $_SERVER['REQUEST_METHOD'];
 switch($method) {
     case "GET":
-        $sql = "SELECT plat.id, libellee, prix, nomCat, nomFrn FROM plat JOIN categories JOIN fournisseur ON plat.fournisseur = fournisseur.id AND plat.categorie = categories.id";
+        $sql = "SELECT plat.id, libellee, prix, nomCat, nomFrn, checked FROM plat JOIN categories JOIN fournisseur ON plat.fournisseur = fournisseur.id AND plat.categorie = categories.id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
