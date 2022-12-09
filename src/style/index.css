@@ -1,3 +1,8 @@
+html{
+    font-family: "Open Sans";
+    color: #455a64;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
