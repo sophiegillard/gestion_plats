@@ -9,6 +9,8 @@ import {ConfirmationDeleteModal} from "./modal/ConfirmationDeleteModal.jsx";
 import {isCheckbox} from "../utils/isCheckbox.js";
 import {ActionButton} from "./buttons/ActionButton.jsx";
 import {handleCheckboxChange} from "../utils/handleCheckboxChange.js";
+import logo from "../../public/assets/logo.png";
+import {Link} from "react-router-dom";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -28,7 +30,7 @@ export const Table = () =>{
 
 
     return (
-        <>
+        <div className='bg-white'>
    {/*     To be moved to deleteButton?    */}
         <ConfirmationDeleteModal
             warning = {'Attention'}
@@ -39,14 +41,17 @@ export const Table = () =>{
             />
 
         {/*   Modals  */}
-        <AddDishModal isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
-        <EditModal editModal={editModal} setEditModal={setEditModal} setDatas={setDatas} datas={datas} selectedId={selectedId}/>
 
             <main className="flex flex-col justify-center place-items-center">
 
-            <header className="table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-[90%] place-items-center">
+            <header className="table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-full place-items-center">
 
-                <h2 className="table__title ">Gestion des plats</h2>
+                <div className="flex flex-row gap-4 align-middle">
+                    <Link to={'/'}>
+                        <img src={logo} alt='logo' className="h-10 " />
+                    </Link>
+                    <h2 className="table__title text-2xl self-center">Gestion des plats</h2>
+                </div>
 
                 <div className="flex flex-row gap-4">
 
@@ -67,7 +72,7 @@ export const Table = () =>{
             </header>
 
             {/*  Table  */}
-            <div className="table w-[90%] border-collapse"> 
+            <div className="table w-full border-collapse">
                 <div className="table__container table w-full text-center">
 
                     <div className="table-header-group font-bold h-12">
@@ -87,11 +92,13 @@ export const Table = () =>{
 
                             <div key={key} id={data.id} className="table-row row-content border-b-2 border-gray-200 h-12">
 
-                                <input type="checkbox"
-                                value={data.id}
-                                onChange={() => handleCheckboxChange(setDatas, datas, data.id)}
-                                checked={!data.checked}
-                                ></input>
+                                <div className="pl-2 h-12 py-3 justify-center">
+                                    <input type="checkbox"
+                                    value={data.id}
+                                    onChange={() => handleCheckboxChange(setDatas, datas, data.id)}
+                                    checked={!data.checked}
+                                    ></input>
+                                </div>
 
                                 <div className="table-cell align-middle">{data.libellee}</div>
 
@@ -113,7 +120,11 @@ export const Table = () =>{
 
                 </div>
             </div>
+
+                <AddDishModal isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
+                <EditModal editModal={editModal} setEditModal={setEditModal} setDatas={setDatas} datas={datas} selectedId={selectedId}/>
+
         </main>
-        </>
+        </div>
     )
 }

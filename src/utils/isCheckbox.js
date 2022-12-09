@@ -2,7 +2,7 @@ export const isCheckbox = () => {
     let arrayIds = [];
     let allRows = document.querySelectorAll('.row-content')
     allRows.forEach(row =>{
-        if (row.firstChild.checked){
+        if (row.firstChild.firstChild.checked){
             arrayIds.push(row.id)
             console.log(arrayIds)
         }

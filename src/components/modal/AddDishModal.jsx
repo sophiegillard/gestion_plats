@@ -58,57 +58,59 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
 
     }
 
-    return <>
+    return <div className="">
     <SuccessModal
         modalState={isSuccessModal}
         successMessage={'Le plat a bien été sauvegardé.'}/>
 
-    <dialog modal-mode="mega" open={isModalOpen}
-    className="shadow-xl backdrop-blur p-0 min-w-[50%] text-font-main">
-        <form action="src/components/modal/AddDishModal.jsx" method="dialog" className="" onSubmit={(e)=>handleSubmit(e)}>
+    <dialog open={isModalOpen}
+    className="bg-black bg-opacity-60 h-full w-screen absolute top-0 scroll-none backdrop-blur-sm">
+        <div className="flex justify-center">
+            <form action="src/components/modal/AddDishModal.jsx" method="dialog" className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28" onSubmit={(e)=>handleSubmit(e)}>
 
-            {/*Header Modal*/}
-            <div className="flex justify-between border-b-2 p-4">
-                <h3 className="text-xl">Ajout d'un plat</h3>
-                <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
-            </div>
-            {/*End Header Modal*/}
+                {/*Header Modal*/}
+                <div className="flex justify-between border-b-2 p-4">
+                    <h3 className="text-xl">Ajout d'un plat</h3>
+                    <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
+                </div>
+                {/*End Header Modal*/}
 
-            <div className="px-4 flex flex-col gap-4 my-4">
+                <div className="px-4 flex flex-col gap-4 my-4">
 
-                <TextInputModal label={'Libellé du plat'} forwardRef={dishName} />
+                    <TextInputModal label={'Libellé du plat'} forwardRef={dishName} />
 
-                <SelectInputModal label={'Famille du plat'}
-                                  forwardRef={dishCat}
-                                  optionText={'Veuillez selectionner une famille de plat'}
-                                  arrayToDisplay={categories}
-                                  />
+                    <SelectInputModal label={'Famille du plat'}
+                                      forwardRef={dishCat}
+                                      optionText={'Veuillez selectionner une famille de plat'}
+                                      arrayToDisplay={categories}
+                                      />
 
-                <SelectInputModal label={'Fournisseur'}
-                                  forwardRef={dishProvider}
-                                  optionText={'Veuillez selectionner un fournisseur'}
-                                  arrayToDisplay={fournisseurs}
-                />
-
-                <NumberInputModal label={'Prix'} forwardRef={dishPrice} />
-
-                {isErrorMessage && <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2" role="alert">
-                    <p>Veuillez compléter tous les champs pour valider</p>
-                </div>}
-
-            </div>
-
-            <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
-                <button type="button" onClick={() => SetModalOpen(false)} value="cancel">Annuler</button>
-
-                <ActionButton
-                    isIconNeeded={false}
-                    label={'Ajouter'}
-                    bgColor={'bg-green-button'} onClickAction={()=>setSuccessModal(true)}
+                    <SelectInputModal label={'Fournisseur'}
+                                      forwardRef={dishProvider}
+                                      optionText={'Veuillez selectionner un fournisseur'}
+                                      arrayToDisplay={fournisseurs}
                     />
-            </div>
 
-        </form>
+                    <NumberInputModal label={'Prix'} forwardRef={dishPrice} />
+
+                    {isErrorMessage && <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2" role="alert">
+                        <p>Veuillez compléter tous les champs pour valider</p>
+                    </div>}
+
+                </div>
+
+                <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
+                    <button type="button" onClick={() => SetModalOpen(false)} value="cancel">Annuler</button>
+
+                    <ActionButton
+                        isIconNeeded={false}
+                        label={'Ajouter'}
+                        bgColor={'bg-green-button'} onClickAction={()=>setSuccessModal(true)}
+                        />
+                </div>
+
+            </form>
+        </div>
     </dialog>
-    </>
+    </div>
 }
