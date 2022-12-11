@@ -59,7 +59,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                 <form
                     onSubmit={()=>handleSubmit()}
                     method="dialog"
-                    className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 text-left">
+                    className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 text-left max-sm:w-[99%]">
 
                     {/*Header Modal*/}
                     <div className="flex justify-between border-b-2 p-4">

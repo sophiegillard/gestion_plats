@@ -28,7 +28,7 @@ export const Table = () =>{
 
 
     return (
-        <div className='bg-white h-[90%] shadow-lg flex flex-col justify-between'>
+        <div className='shadow-lg flex flex-col justify-between max-sm=h-screen'>
    {/*     To be moved to deleteButton?    */}
         <ConfirmationDeleteModal
             warning = {'Attention'}
@@ -41,13 +41,14 @@ export const Table = () =>{
 
         {/*   Modals  */}
 
-            <main className="flex flex-col justify-center place-items-center">
+            <main className="flex flex-col justify-between place-items-center h-full">
 
-            <div className="modal_header table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue h-14 text-white px-4 w-full place-items-center">
+            <div className="modal_header table__title__container flex flex-row justify-between bg-gradient-to-r from-light-blue to-dark-blue md:h-14 text-white px-4 w-full place-items-center
+            max-sm:flex-col max-sm:py-2 max-sm:gap-4">
 
                 <div className="flex flex-row gap-4 align-middle">
                     <Link to={'/'}>
-                        <img src={logo} alt='logo' className="h-10 " />
+                        <img src={logo} alt='logo' className="h-10" />
                     </Link>
                     <h2 className="table__title text-2xl self-center">Gestion des plats</h2>
                 </div>
@@ -71,7 +72,7 @@ export const Table = () =>{
             </div>
 
             {/*  Table  */}
-            <div className="table w-full border-collapse">
+            <div className="table max-sm:text-sm w-full flex-grow border-collapse overflow-x-scroll overflow-scroll">
                 <div className="table__container table w-full text-center">
 
                     <div className="table-header-group font-bold h-16">
@@ -85,11 +86,11 @@ export const Table = () =>{
                         </div>
                     </div>
 
-                    <div className="table-row-group">
+                    <div className="table-row-group flex justify-between">
 
                         {datas.map((data)=>
 
-                            <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 h-16">
+                            <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 flex-grow h-[calc(10%)]">
 
                                 <DishRow data={data}
                                 setDatas={setDatas}
