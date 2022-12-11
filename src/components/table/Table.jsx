@@ -1,16 +1,16 @@
-import add from "../../public/assets/add.png"
-import { AddDishModal } from "./modal/AddDishModal.jsx"
+import add from "../../../public/assets/add.png"
+import { AddDishModal } from "../modal/AddDishModal.jsx"
 import {useState, useEffect, useRef} from "react";
-import { fetchDatas } from "../utils/fetchDatas";
-import { DeleteButton } from './buttons/DeleteButton.jsx'
-import {ConfirmationDeleteModal} from "./modal/ConfirmationDeleteModal.jsx";
-import {isCheckbox} from "../utils/isCheckbox.js";
-import {ActionButton} from "./buttons/ActionButton.jsx";
-import logo from "../../public/assets/logo.png";
+import { fetchDatas } from "../../utils/fetchDatas.js";
+import { DeleteButton } from '../buttons/DeleteButton.jsx'
+import {ConfirmationDeleteModal} from "../modal/ConfirmationDeleteModal.jsx";
+import {isCheckbox} from "../../utils/isCheckbox.js";
+import {ActionButton} from "../buttons/ActionButton.jsx";
+import logo from "../../../public/assets/logo.png";
 import {Link} from "react-router-dom";
-import {DishRow} from "./table/DishRow";
-import {handleCheckboxChange} from "../utils/handleCheckboxChange.js";
-import {ModalFooter} from "./modalComponents/ModalFooter.jsx";
+import {DishRow} from "./DishRow.jsx";
+import {handleCheckboxChange} from "../../utils/handleCheckboxChange.js";
+import {ModalFooter} from "../modal/modalComponents/ModalFooter.jsx";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -18,18 +18,17 @@ export const Table = () =>{
     const [isDeleteModal, setDeleteModal] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
 
-
     let checkIfCheckBoxAreCheck = isCheckbox();
      
     useEffect(() => {
-        const url= `http://localhost:8888/api/index.php`;
+        const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`;
         fetchDatas (setDatas,url);
     }, []);
 
 
 
     return (
-        <div className='bg-white h-[90vh] overflow-scroll'>
+        <div className='bg-white h-[90%] shadow-lg flex flex-col justify-between'>
    {/*     To be moved to deleteButton?    */}
         <ConfirmationDeleteModal
             warning = {'Attention'}
@@ -37,6 +36,7 @@ export const Table = () =>{
             isDeleteModal={isDeleteModal}
             setDeleteModal = {setDeleteModal}
             setDatas={setDatas}
+            pageNumber={pageNumber}
             />
 
         {/*   Modals  */}
@@ -74,14 +74,14 @@ export const Table = () =>{
             <div className="table w-full border-collapse">
                 <div className="table__container table w-full text-center">
 
-                    <div className="table-header-group font-bold h-12">
+                    <div className="table-header-group font-bold h-16">
                         <div className="table-row border-b-2 border-gray-400">
-                            <div className="table-cell align-middle"></div>
-                            <div className="table-cell align-middle">Nom</div>
-                            <div className="table-cell align-middle">Fournisseur</div>
-                            <div className="table-cell align-middle">Catégorie</div>
-                            <div className="table-cell align-middle">Prix</div>
-                            <div className="table-cell align-middle">Actions</div>
+                            <div className="table-cell align-middle w-[calc(10%)]"></div>
+                            <div className="table-cell align-middle w-[calc(22%)]">Nom</div>
+                            <div className="table-cell align-middle w-[calc(22%)]">Fournisseur</div>
+                            <div className="table-cell align-middle w-[calc(22%)]">Catégorie</div>
+                            <div className="table-cell align-middle w-[calc(10%)]">Prix</div>
+                            <div className="table-cell align-middle w-[calc(14%)]">Actions</div>
                         </div>
                     </div>
 
@@ -89,12 +89,13 @@ export const Table = () =>{
 
                         {datas.map((data)=>
 
-                            <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 h-12">
+                            <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 h-16">
 
                                 <DishRow data={data}
                                 setDatas={setDatas}
                                 datas={datas}
-                                         onChangeAction={()=>handleCheckboxChange(setDatas, datas, data.id)}/>
+                                pageNumber={pageNumber}
+                                onChangeAction={()=>handleCheckboxChange(setDatas, datas, data.id)}/>
 
                             </div>
                         )}                        
@@ -104,11 +105,20 @@ export const Table = () =>{
                 </div>
             </div>
 
-            <ModalFooter pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+            <AddDishModal isModalOpen={isModalOpen}
+                              SetModalOpen={SetModalOpen}
+                              setDatas={setDatas}
+                              pageNumber={pageNumber}/>
 
-                <AddDishModal isModalOpen={isModalOpen} SetModalOpen={SetModalOpen} setDatas={setDatas} datas={datas} />
+            </main>
 
-        </main>
+            <footer className="">
+            <ModalFooter pageNumber={pageNumber}
+                         setPageNumber={setPageNumber}
+                         setDatas={setDatas}
+                         datas={datas}/>
+            </footer>
+
         </div>
     )
 }

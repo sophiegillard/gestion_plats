@@ -1,7 +1,6 @@
 html{
     font-family: "Open Sans";
     color: #455a64;
-    max-height: 100vh;
 }
 
 @tailwind base;

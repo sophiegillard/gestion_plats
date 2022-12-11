@@ -2,15 +2,15 @@ import {useState, useEffect, useRef} from "react";
 import { fetchDatas } from "../../utils/fetchDatas.js";
 import axios from "axios";
 import {ActionButton} from "../buttons/ActionButton.jsx";
-import {TextInputModal} from "../modalComponents/TextInputModal.jsx";
-import {SelectInputModal} from '../modalComponents/SelectInputModal.jsx'
-import {NumberInputModal} from "../modalComponents/NumberInputModal.jsx";
-import {CloseButton} from "../modalComponents/CloseButton.jsx";
+import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
+import {SelectInputModal} from './modalComponents/SelectInputModal.jsx'
+import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
+import {CloseButton} from "./modalComponents/CloseButton.jsx";
 import {SuccessModal} from "./SuccessModal.jsx";
 
 
 
-export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
+export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{
 
 /*    Declaration of the useState*/
     const [categories, setCategories] = useState([])
@@ -45,7 +45,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
                 categorie : cat
             })
                 .then(function (response) {
-                    const url= 'http://localhost:8888/api/index.php'
+                    const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
                     fetchDatas (setDatas,url);
                 })
                 .catch(function (error) {
@@ -66,7 +66,10 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
     <dialog open={isModalOpen}
     className="bg-black bg-opacity-60 h-full w-screen absolute top-0 scroll-none backdrop-blur-sm">
         <div className="flex justify-center">
-            <form action="src/components/modal/AddDishModal.jsx" method="dialog" className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28" onSubmit={(e)=>handleSubmit(e)}>
+            <form action="src/components/modal/AddDishModal.jsx"
+                  method="dialog"
+                  className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28"
+                  onSubmit={(e)=>handleSubmit(e)}>
 
                 {/*Header Modal*/}
                 <div className="flex justify-between border-b-2 p-4">
@@ -100,12 +103,15 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas}) =>{
                 </div>
 
                 <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
-                    <button type="button" onClick={() => SetModalOpen(false)} value="cancel">Annuler</button>
+                    <button type="button"
+                            onClick={() => SetModalOpen(false)}
+                            value="cancel">Annuler</button>
 
                     <ActionButton
                         isIconNeeded={false}
                         label={'Ajouter'}
-                        bgColor={'bg-green-button'} onClickAction={()=>setSuccessModal(true)}
+                        bgColor={'bg-green-button'}
+                        onClickAction={()=>setSuccessModal(true)}
                         />
                 </div>
 

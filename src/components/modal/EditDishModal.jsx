@@ -1,14 +1,14 @@
 import {useEffect, useRef, useState} from "react";
 import {fetchDatas} from "../../utils/fetchDatas.js";
 import axios from "axios";
-import {CloseButton} from "../modalComponents/CloseButton.jsx";
-import {TextInputModal} from "../modalComponents/TextInputModal.jsx";
-import {SelectInputModal} from "../modalComponents/SelectInputModal.jsx";
-import {NumberInputModal} from "../modalComponents/NumberInputModal.jsx";
+import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
+import {SelectInputModal} from "./modalComponents/SelectInputModal.jsx";
+import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 import {SuccessModal} from "./SuccessModal.jsx";
 
-export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas}) =>{
+export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas, pageNumber}) =>{
 
     const id = theDish.id;
 
@@ -38,7 +38,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
         updateDish(setDatas, datas, id, updatedDish)
         axios.put(`http://localhost:8888/api/index.php/${id}/update`, updatedDish)
             .then(function(response){
-                const url= 'http://localhost:8888/api/index.php'
+                const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
                 fetchDatas (setDatas,url);
         });
 
@@ -59,7 +59,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                 <form
                     onSubmit={()=>handleSubmit()}
                     method="dialog"
-                    className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28">
+                    className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 text-left">
 
                     {/*Header Modal*/}
                     <div className="flex justify-between border-b-2 p-4">
@@ -107,7 +107,8 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                         <ActionButton
                             isIconNeeded={false}
                             label={'Enregistrer les modifications'}
-                            bgColor={'bg-green-button'} onClickAction={()=>setSuccessUpdateModal(true)}
+                            bgColor={'bg-green-button'}
+                            onClickAction={()=>setSuccessUpdateModal(true)}
                         />
                     </div>
 

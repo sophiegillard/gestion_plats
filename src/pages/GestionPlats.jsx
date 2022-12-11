@@ -1,10 +1,10 @@
-import { Table } from '../components/Table'
+import { Table } from '../components/table/Table.jsx'
 
 
 export const GestionPlats = () => {
 
     return (
-        <div className="p-8 bg-gray-50">
-            <Table  />
+        <div className="p-8 h-screen">
+            <Table />
         </div>);
 }

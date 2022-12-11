@@ -4,7 +4,6 @@ export const isCheckbox = () => {
     allRows.forEach(row =>{
         if (row.firstChild.firstChild.checked){
             arrayIds.push(row.id)
-            console.log(arrayIds)
         }
     })
     return arrayIds;

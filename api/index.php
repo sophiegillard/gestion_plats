@@ -1,4 +1,5 @@
 <?php
+
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: *");
     header( "Access-Control-Allow-Methods: GET,PUT,POST,DELETE,PATCH,OPTIONS");
@@ -10,9 +11,35 @@ $conn = $db->connect();
 $method = $_SERVER['REQUEST_METHOD'];
 switch($method) {
     case "GET":
+        $currentPage = $_GET['currentPage'];
+        // On détermine le nombre total d'articles//
+        $sql = 'SELECT COUNT(*) AS nb_plat FROM `plat`';
 
-        $sql = "SELECT plat.id, libellee, prix, nomCat, nomFrn, checked FROM plat JOIN categories JOIN fournisseur ON plat.fournisseur = fournisseur.id AND plat.categorie = categories.id";
+        // On prépare la requête
         $stmt = $conn->prepare($sql);
+
+        // On exécute
+        $stmt->execute();
+
+        // On récupère le nombre d'articles
+        $result = $stmt->fetch();
+
+        $nbPlats = (int) $result['nb_plat'];
+
+        // On détermine le nombre d'articles par page
+        $parPage = 10;
+
+        // On calcule le nombre de pages total
+        $pages = ceil($nbPlats / $parPage);
+
+        // Calcul du 1er article de la page
+        $premier = ($currentPage * $parPage) - $parPage;
+
+
+        $sql = "SELECT plat.id, libellee, prix, nomCat, nomFrn, checked FROM plat JOIN categories JOIN fournisseur ON plat.fournisseur = fournisseur.id AND plat.categorie = categories.id ORDER BY plat.id DESC LIMIT :premier, :parpage;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':premier', $premier, PDO::PARAM_INT);
+        $stmt->bindValue(':parpage', $parPage, PDO::PARAM_INT);
         $stmt->execute();
         $datas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

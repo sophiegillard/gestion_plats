@@ -2,7 +2,7 @@ export const NumberInputModal = ({label, forwardRef, value, name, onChangeAction
     return <>
         <p className="flex flex-col">
             <label>{label}</label>
-            <input type="number" min="0" max="100" placeholder="0" ref={forwardRef}
+            <input type="number" min="0" max="100" placeholder="0" ref={forwardRef} step="any"
                    value={value}
                    name = {name}
                    onChange={onChangeAction}
