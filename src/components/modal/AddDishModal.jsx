@@ -68,7 +68,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
         <div className="flex justify-center">
             <form action="src/components/modal/AddDishModal.jsx"
                   method="dialog"
-                  className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28"
+                  className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 max-sm:w-[99%]"
                   onSubmit={(e)=>handleSubmit(e)}>
 
                 {/*Header Modal*/}
