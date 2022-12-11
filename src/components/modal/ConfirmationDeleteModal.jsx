@@ -1,5 +1,4 @@
 import attention from "../../../public/assets/attention.png"
-import axios from "axios";
 import {useState} from "react";
 import {SuccessModal} from "./SuccessModal.jsx";
 import {deleteDataByID} from "../../utils/deleteDataById.js";
