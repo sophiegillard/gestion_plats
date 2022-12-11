@@ -1,3 +1,8 @@
+html{
+  font-family: "Open Sans";
+  color: #455a64;
+}
+
 /*
 ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com
 */
@@ -419,7 +424,7 @@ video {
   display: none;
 }
 
-*, ::before, ::after {
+*, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -466,7 +471,7 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-::backdrop {
+::backdrop{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -513,26 +518,26 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.table {
+.table{
   display: table;
 }
 
-.table-cell {
+.table-cell{
   display: table-cell;
 }
 
-.table-header-group {
+.table-header-group{
   display: table-header-group;
 }
 
-.table-row-group {
+.table-row-group{
   display: table-row-group;
 }
 
-.table-row {
+.table-row{
   display: table-row;
 }
 
-.text-left {
+.text-left{
   text-align: left;
 }
