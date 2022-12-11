@@ -8,5 +8,6 @@ export const DeleteButton = ({ action }) =>{
                     <span>Supprimer</span>
                     <img src={trash} alt="icon ajouter" className="h-4 w-4"/>
     </button>
+
     </>
 }
