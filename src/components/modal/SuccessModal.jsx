@@ -21,7 +21,9 @@ export const SuccessModal = ({modalState, action, successMessage}) => {
                         <p>{successMessage}</p>
                     </div>
 
-                    <ActionButton label={'OK'} bgColor={'bg-purple-button'} onClickAction={action}/>
+                    <ActionButton label={'OK'}
+                                  bgColor={'bg-purple-button'} bgColorHover={'bg-purple-button-hover'}
+                                  onClickAction={action}/>
 
                 </form>
         </div>

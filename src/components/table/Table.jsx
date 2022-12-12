@@ -65,7 +65,7 @@ export const Table = () =>{
                         isIconNeeded={true}
                         image={add}
                         altImg={'icon ajouter'}
-                        bgColor={'bg-green-button'} />
+                        bgColor={'bg-green-button'} bgColorHover={'bg-green-button-hover'} />
 
                 </div>
 

@@ -31,11 +31,11 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
                     </div>
 
                     <div className="flex gap-4">
-                        <button className="bg-light-grey text-font-main px-4 py-2 rounded-sm shadow-md"
+                        <button className="bg-light-grey hover:bg-light-grey-hover text-font-main px-4 py-2 rounded-sm shadow-md"
                                 onClick={()=>setDeleteModal(false)}>
                             Annuler
                         </button>
-                        <button className="bg-red-button text-white px-4 py-2 rounded-sm shadow-md"
+                        <button className="bg-red-button hover:bg-red-button-hover text-white px-4 py-2 rounded-sm shadow-md"
                                 onClick={() => setSuccessDeleteModal(true)}>
                             Supprimer l'élément
                         </button>

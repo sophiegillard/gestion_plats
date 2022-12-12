@@ -107,7 +107,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                         <ActionButton
                             isIconNeeded={false}
                             label={'Enregistrer les modifications'}
-                            bgColor={'bg-green-button'}
+                            bgColor={'bg-green-button'} bgColorHover={'bg-green-button-hover'}
                             onClickAction={()=>setSuccessUpdateModal(true)}
                         />
                     </div>

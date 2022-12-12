@@ -110,7 +110,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                     <ActionButton
                         isIconNeeded={false}
                         label={'Ajouter'}
-                        bgColor={'bg-green-button'}
+                        bgColor={'bg-green-button'} bgColorHover={'bg-purple-button-hover'}
                         onClickAction={()=>setSuccessModal(true)}
                         />
                 </div>

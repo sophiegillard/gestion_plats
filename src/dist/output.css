@@ -855,6 +855,16 @@ video {
   background-color: rgb(40 167 69 / var(--tw-bg-opacity));
 }
 
+.bg-purple-button-hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 76 176 / var(--tw-bg-opacity));
+}
+
+.bg-green-button-hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(35 129 57 / var(--tw-bg-opacity));
+}
+
 .bg-purple-button{
   --tw-bg-opacity: 1;
   background-color: rgb(115 103 240 / var(--tw-bg-opacity));
@@ -1022,6 +1032,15 @@ video {
   --tw-backdrop-blur: blur(4px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.hover\:bg-red-button-hover:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(204 61 88 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-light-grey-hover:hover{
+  background-color: rgba(195,198,199,0.68);
 }
 
 .hover\:bg-gray-100:hover{
