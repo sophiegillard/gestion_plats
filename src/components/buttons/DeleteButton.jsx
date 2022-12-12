@@ -1,11 +1,11 @@
 import trash from "../../../public/assets/delete.png"
 
-export const DeleteButton = ({ action }) =>{
+export const DeleteButton = ({ action, showDeleteButton }) =>{
 
     return <>
     <button type="submit"
             onClick={action}
-            className="bg-red-button hover:bg-red-button-hover rounded-sm shadow-lg text-white px-4 py-2 flex flex-row gap-2 justify-center place-items-center">
+            className={`${showDeleteButton} bg-red-button hover:bg-red-button-hover rounded-sm shadow-lg text-white px-4 py-2 flex flex-row gap-2 justify-center place-items-center`}>
 
         <span>Supprimer</span>
 

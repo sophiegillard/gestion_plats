@@ -17,6 +17,7 @@ export const Table = () =>{
     const [isModalOpen, SetModalOpen] = useState(false)
     const [isDeleteModal, setDeleteModal] = useState(false)
     const [pageNumber, setPageNumber] = useState(1)
+    const [showDeleteButton, setDeleteButton] = useState( 'block')
 
     let checkIfCheckBoxAreCheck = isCheckbox();
      
@@ -24,7 +25,6 @@ export const Table = () =>{
         const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`;
         fetchDatas (setDatas,url);
     }, []);
-
 
 
     return (
@@ -38,6 +38,7 @@ export const Table = () =>{
                 setDeleteModal = {setDeleteModal}
                 setDatas={setDatas}
                 pageNumber={pageNumber}
+                setDeleteButton={setDeleteButton}
                 />
 
             {/*   Modals to add new dish  */}
@@ -64,7 +65,7 @@ export const Table = () =>{
                     <div className="flex flex-row gap-4">
 
                         {/*  Show Delete Button only if one or more boxes are checked  */}
-                        {checkIfCheckBoxAreCheck.length === 0  ? null : <DeleteButton action={()=>setDeleteModal(true)} />}
+                        {checkIfCheckBoxAreCheck.length === 0  ? null : <DeleteButton action={()=>setDeleteModal(true)} showDeleteButton={showDeleteButton}/>}
 
                         {/* Button to open Add Dish Modal */}
                         <ActionButton
@@ -102,7 +103,11 @@ export const Table = () =>{
                                     setDatas={setDatas}
                                     datas={datas}
                                     pageNumber={pageNumber}
-                                    onChangeAction={()=>handleCheckboxChange(setDatas, datas, data.id)}/>
+                                    onChangeAction={()=>{
+                                        handleCheckboxChange(setDatas, datas, data.id)
+                                        if(showDeleteButton === 'hidden'){
+                                            setDeleteButton('block')
+                                        }}}/>
 
                                 </div>
                             )}

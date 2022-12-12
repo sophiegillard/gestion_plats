@@ -4,7 +4,7 @@ import {SuccessModal} from "./SuccessModal.jsx";
 import {deleteDataByID} from "../../utils/deleteDataById.js";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 
-export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDeleteModal, setDatas, pageNumber}) =>{
+export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDeleteModal, setDatas, pageNumber, setDeleteButton}) =>{
 
     const [successDeleteModal, setSuccessDeleteModal] = useState(false)
 
@@ -24,6 +24,7 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
                           deleteDataByID({ setDatas, pageNumber }, e);
                           setSuccessDeleteModal(true);
                           setDeleteModal(false)
+                          setDeleteButton('hidden')
                       }}
                       method="dialog"
                       className="bg-white text-font-main flex flex-col justify-center items-center p-8 gap-6 mt-28">
