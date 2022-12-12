@@ -29,7 +29,7 @@ export const Table = () =>{
 
     return (
         <div className='shadow-lg flex flex-col justify-between max-sm=h-screen'>
-   {/*     To be moved to deleteButton?    */}
+
         <ConfirmationDeleteModal
             warning = {'Attention'}
             message={"Etes-vous sûr de vouloir supprimer définitivement l'élément?"}
