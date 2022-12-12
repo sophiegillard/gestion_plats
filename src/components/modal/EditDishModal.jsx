@@ -34,7 +34,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
 
 
     const handleSubmit = (e) => {
-      /*  e.preventDefault();*/
+        e.preventDefault();
         updateDish(setDatas, datas, id, updatedDish)
         axios.put(`http://localhost:8888/api/index.php/${id}/update`, updatedDish)
             .then(function(response){
@@ -57,7 +57,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
             <div className="flex justify-center">
 
                 <form
-                    onSubmit={()=>handleSubmit()}
+                    onSubmit={(e)=>handleSubmit(e)}
                     method="dialog"
                     className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 text-left max-sm:w-[99%]">
 
@@ -108,7 +108,7 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                             isIconNeeded={false}
                             label={'Enregistrer les modifications'}
                             bgColor={'bg-green-button'} bgColorHover={'bg-green-button-hover'}
-                            onClickAction={()=>setSuccessUpdateModal(true)}
+                            onClickAction={()=>{setSuccessUpdateModal(true), setEditModal(false)}}
                         />
                     </div>
 

@@ -23,6 +23,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     const dishProvider = useRef('')
     const dishCat = useRef('');
     const dishPrice = useRef('');
+    const catOption = useRef('')
 
     useEffect(() => {
         const urlCategory= 'http://localhost:8888/api/category.php'
@@ -32,6 +33,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     }, []);
 
     const handleSubmit = (e) =>{
+        e.preventDefault();
         if(dishName.current.value != '' && dishProvider.current.value != '' && dishCat.current.value != '' && dishPrice.current.value != ''){
             const name = dishName.current.value;
             const provider = dishProvider.current.value;
@@ -47,6 +49,11 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                 .then(function (response) {
                     const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
                     fetchDatas (setDatas,url);
+                    SetModalOpen(false);
+                    e.target.reset();
+                })
+                .then(function (response) {
+                    setSuccessModal(true)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -61,6 +68,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     return <div className="">
     <SuccessModal
         modalState={isSuccessModal}
+        action={()=>setSuccessModal(false)}
         successMessage={'Le plat a bien été sauvegardé.'}/>
 
     <dialog open={isModalOpen}

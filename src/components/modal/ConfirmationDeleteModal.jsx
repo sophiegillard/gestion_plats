@@ -10,7 +10,7 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
     return <>
         <SuccessModal
             modalState={successDeleteModal}
-            action={()=>deleteDataByID({setDatas, pageNumber})}
+
             successMessage={'Le plat a été supprimé avec succès.'}/>
 
         <dialog modal-mode="mini"
@@ -36,7 +36,11 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
                             Annuler
                         </button>
                         <button className="bg-red-button hover:bg-red-button-hover text-white px-4 py-2 rounded-sm shadow-md"
-                                onClick={() => setSuccessDeleteModal(true)}>
+                                onClick={(e) => {
+                                    deleteDataByID({ setDatas, pageNumber }, e);
+                                    setSuccessDeleteModal(true);
+                                    setDeleteModal(false)
+                                }}>
                             Supprimer l'élément
                         </button>
                     </div>
