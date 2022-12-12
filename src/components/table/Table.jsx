@@ -58,7 +58,7 @@ export const Table = () =>{
                         <Link to={'/'}>
                             <img src={logo} alt='logo' className="h-10" />
                         </Link>
-                        <h2 className="table__title text-2xl self-center">Gestion des plats</h2>
+                        <h2 className="table__title text-2xl self-center">Gestion de plats</h2>
                     </div>
 
                     {/* ADD and DELETE buttons */}
