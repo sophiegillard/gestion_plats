@@ -3,6 +3,7 @@ html{
     color: #455a64;
 }
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

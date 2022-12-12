@@ -9,7 +9,7 @@ export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
 
     return <>
 
-        <div className="pl-2 h-12 py-3 justify-center">
+        <div className="pl-2 py-3 justify-center">
             <input type="checkbox"
                    value={data.id}
                    onChange={onChangeAction}
@@ -17,15 +17,15 @@ export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
             ></input>
         </div>
 
-        <div className="table-cell align-middle">{data.libellee}</div>
+        <div className="table-cell align-middle" data-label="Libellee">{data.libellee}</div>
 
-        <div className="table-cell align-middle" >{data.nomFrn}</div>
+        <div className="table-cell align-middle" data-label="Fournisseur°">{data.nomFrn}</div>
 
-        <div className="table-cell align-middle">{data.nomCat}</div>
+        <div className="table-cell align-middle" data-label="Catégorie">{data.nomCat}</div>
 
-        <div className="table-cell align-middle">{data.prix}</div>
+        <div className="table-cell align-middle" data-label="Prix">{data.prix}</div>
 
-        <div className="table-cell align-middle" >
+        <div className="table-cell align-middle">
             <EditButton action={()=>setEditModal(true)} idButton={data.id} />
         </div>
 

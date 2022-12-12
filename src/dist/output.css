@@ -608,20 +608,16 @@ video {
   height: 100%;
 }
 
-.h-12{
-  height: 3rem;
+.h-16{
+  height: 4rem;
 }
 
-.h-\[90\%\]{
-  height: 90%;
+.h-\[calc\(10\%\)\]{
+  height: calc(10%);
 }
 
 .h-14{
   height: 3.5rem;
-}
-
-.h-16{
-  height: 4rem;
 }
 
 .w-screen{
@@ -689,6 +685,10 @@ video {
   max-width: fit-content;
 }
 
+.flex-grow{
+  flex-grow: 1;
+}
+
 .border-collapse{
   border-collapse: collapse;
 }
@@ -739,6 +739,14 @@ video {
 
 .self-center{
   align-self: center;
+}
+
+.overflow-scroll{
+  overflow: scroll;
+}
+
+.overflow-x-scroll{
+  overflow-x: scroll;
 }
 
 .rounded-sm{
@@ -883,10 +891,6 @@ video {
   --tw-gradient-to: #36337e;
 }
 
-.p-8{
-  padding: 2rem;
-}
-
 .p-4{
   padding: 1rem;
 }
@@ -897,6 +901,10 @@ video {
 
 .p-2{
   padding: 0.5rem;
+}
+
+.p-8{
+  padding: 2rem;
 }
 
 .px-4{
@@ -1028,6 +1036,40 @@ video {
 .hover\:text-gray-700:hover{
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+@media not all and (min-width: 640px){
+  .max-sm\:w-\[99\%\]{
+    width: 99%;
+  }
+
+  .max-sm\:flex-col{
+    flex-direction: column;
+  }
+
+  .max-sm\:gap-4{
+    gap: 1rem;
+  }
+
+  .max-sm\:py-2{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .max-sm\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+@media (min-width: 768px){
+  .md\:h-14{
+    height: 3.5rem;
+  }
+
+  .md\:p-8{
+    padding: 2rem;
+  }
 }
 
 @media (min-width: 1024px){
