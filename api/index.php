@@ -15,13 +15,8 @@ switch($method) {
         // On détermine le nombre total d'articles//
         $sql = 'SELECT COUNT(*) AS nb_plat FROM `plat`';
 
-        // On prépare la requête
         $stmt = $conn->prepare($sql);
-
-        // On exécute
         $stmt->execute();
-
-        // On récupère le nombre d'articles
         $result = $stmt->fetch();
 
         $nbPlats = (int) $result['nb_plat'];
@@ -48,7 +43,8 @@ switch($method) {
 
         case "POST":
             $datas = json_decode(file_get_contents('php://input'));
-            $sql = "INSERT INTO `plat` (`id`, `libellee`, `prix`, `fournisseur`, `categorie`) VALUES (NULL, :libellee, :prix, (SELECT id from fournisseur WHERE nomFrn = :fournisseur), (SELECT id from categories WHERE nomCat = :categorie))" ;
+            $sql = "INSERT INTO `plat` (`id`, `libellee`, `prix`, `fournisseur`, `categorie`) 
+                    VALUES (NULL, :libellee, :prix, (SELECT id from fournisseur WHERE nomFrn = :fournisseur), (SELECT id from categories WHERE nomCat = :categorie))" ;
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':libellee', $datas->libellee);
             $stmt->bindParam(':prix', $datas->prix);
@@ -65,7 +61,6 @@ switch($method) {
         case "DELETE":
             $sql = "DELETE FROM `plat` WHERE `plat`.`id` = :id " ;
             $path = explode('/', $_SERVER['REQUEST_URI']);
-
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $path[3]);
             if($stmt->execute()) {
@@ -83,8 +78,7 @@ switch($method) {
                 SET `libellee` = :libellee, `prix` = :prix, 
                     `fournisseur` = (SELECT id from fournisseur WHERE nomFrn = :fournisseur),
                     `categorie` = (SELECT id from categories WHERE nomCat = :categorie)
-                WHERE `id` = :id
-                ";
+                WHERE `id` = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $datas->id);
         $stmt->bindParam(':libellee', $datas->libellee);

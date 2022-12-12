@@ -7,47 +7,49 @@ import {SelectInputModal} from "./modalComponents/SelectInputModal.jsx";
 import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 import {SuccessModal} from "./SuccessModal.jsx";
+import {updateDish} from "../../utils/updateDish.js";
 
 export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas, pageNumber}) =>{
-
-    const id = theDish.id;
 
     const [libellee, setLibellee]= useState(theDish.libellee)
     const [categorie, setCategorie]= useState(theDish.nomCat)
     const [fournisseur, setFournisseur]= useState(theDish.nomFrn)
     const [prix, setPrix]= useState(theDish.prix)
-
     const [successUpdateModal, setSuccessUpdateModal] = useState(false)
-
     const [categories, setCategories] = useState([])
     const [fournisseurs, setFournisseurs] = useState([])
 
+    const id = theDish.id;
     const updatedDish = {id, libellee, categorie, fournisseur, prix}
 
     useEffect(() => {
         fetchDatas (setCategories,'http://localhost:8888/api/category.php');
         fetchDatas (setFournisseurs, 'http://localhost:8888/api/fournisseur.php');
+        setEditModal(false)
     }, []);
-
-    const updateDish = (setDatas, datas, id, updated) => {
-            datas.map((item) => item.id === id ? updated : item)}
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         updateDish(setDatas, datas, id, updatedDish)
+
         axios.put(`http://localhost:8888/api/index.php/${id}/update`, updatedDish)
             .then(function(response){
                 const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
                 fetchDatas (setDatas,url);
-        });
-
+                setSuccessUpdateModal(true)
+        })
+            .catch(function (error) {
+                    console.log(error);
+                });
     }
 
 
     return <>
         <SuccessModal
             modalState={successUpdateModal}
+            action={()=>setSuccessUpdateModal(false)}
             successMessage={'Les modifications ont été enregistrées.'}/>
 
         <dialog modal-mode="mega"
@@ -68,50 +70,56 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                     </div>
                     {/*End Header Modal*/}
 
+                    {/*Body Modal*/}
+                    <div className="px-4 flex flex-col gap-4 my-4">
 
-                                <div className="px-4 flex flex-col gap-4 my-4">
-
-                                    <TextInputModal
-                                        label="Libellée du plat"
-                                        name="libellée"
-                                        value={libellee}
-                                        onChangeAction={(e)=>setLibellee(e.target.value)} />
-
-
-                                    <SelectInputModal
-                                        label={'Famille du plat'}
-                                        optionText={'Veuillez selectionner une famille de plat'}
-                                        arrayToDisplay={categories}
-                                        value={categorie}
-                                        name="catégorie"
-                                        onChangeAction={(e)=>setCategorie(e.target.value)}
-                                    />
-
-                                    <SelectInputModal
-                                        label={'Fournisseur'}
-                                        optionText={'Veuillez selectionner un fournisseur'}
-                                        arrayToDisplay={fournisseurs}
-                                        value={fournisseur}
-                                        name="fournisseur"
-                                        onChangeAction={(e)=>setFournisseur(e.target.value)}
-                                    />
-
-                                    <NumberInputModal label={'Prix'} value={prix} name="prix" onChangeAction={(e)=>setPrix(e.target.value)}  />
-
-                                </div>
+                        <TextInputModal
+                            label="Libellée du plat"
+                            name="libellée"
+                            value={libellee}
+                            onChangeAction={(e)=>setLibellee(e.target.value)} />
 
 
+                        <SelectInputModal
+                            label={'Famille du plat'}
+                            optionText={'Veuillez selectionner une famille de plat'}
+                            arrayToDisplay={categories}
+                            value={categorie}
+                            name="catégorie"
+                            onChangeAction={(e)=>setCategorie(e.target.value)}
+                        />
+
+                        <SelectInputModal
+                            label={'Fournisseur'}
+                            optionText={'Veuillez selectionner un fournisseur'}
+                            arrayToDisplay={fournisseurs}
+                            value={fournisseur}
+                            name="fournisseur"
+                            onChangeAction={(e)=>setFournisseur(e.target.value)}
+                        />
+
+                        <NumberInputModal
+                            label={'Prix'}
+                            value={prix}
+                            name="prix"
+                            onChangeAction={(e)=>setPrix(e.target.value)}  />
+
+                    </div>
+                    {/*END Body Modal*/}
+
+                    {/* footer Modal*/}
                     <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
-                        <button type="submit" value="cancel">Annuler</button>
+                        <button type="submit"
+                                value="cancel">Annuler</button>
 
                         <ActionButton
                             isIconNeeded={false}
                             label={'Enregistrer les modifications'}
                             bgColor={'bg-green-button'} bgColorHover={'bg-green-button-hover'}
-                            onClickAction={()=>{setSuccessUpdateModal(true), setEditModal(false)}}
+                            onClickAction={()=>{setEditModal(false)}}
                         />
                     </div>
-
+                    {/* END footer Modal*/}
 
                 </form>
 

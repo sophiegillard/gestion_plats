@@ -18,24 +18,27 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
             .then(function (response) {
                 const result = response.data
                 const totalPages = (result[0].nb_plat)
-                let lastPageIndex = (Math.round(totalPages/10))+1;
+                let lastPageIndex = (Math.ceil(totalPages/10));
                 setLastPageIndex(lastPageIndex)
             })
+            .catch(function (error) {
+                console.error(error);
+            });
     });
 
 
     const setLastPage = () =>{
-                setPageNumber(lastPage);
-                const url= `http://localhost:8888/api/index.php?currentPage=${lastPage}`;
-                fetchDatas (setDatas,url);}
+        setPageNumber(lastPage);
+        const url= `http://localhost:8888/api/index.php?currentPage=${lastPage}`;
+        fetchDatas (setDatas,url);}
 
 
     const setNextPage = () =>{
         if(pageNumber !== lastPage){
-        const updatedPageNumber = pageNumber + 1
-        setPageNumber(updatedPageNumber)
-        const url= `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
-        fetchDatas (setDatas,url);}
+            const updatedPageNumber = pageNumber + 1
+            setPageNumber(updatedPageNumber)
+            const url= `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
+            fetchDatas (setDatas,url);}
     }
 
     const setPreviousPage = () =>{
@@ -55,7 +58,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
 
 
 
-    return <div className="w-full bg-light-grey h-14 px-4 flex justify-end items-center">
+    return <footer className="w-full bg-light-grey h-14 px-4 flex justify-end items-center">
         <nav aria-label="Page navigation example">
             <ul className="inline-flex items-center">
                 <li>
@@ -88,5 +91,5 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
 
             </ul>
         </nav>
-    </div>
+    </footer>
 }
