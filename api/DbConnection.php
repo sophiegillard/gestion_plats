@@ -1,10 +1,5 @@
 <?php
-require '/Applications/MAMP/mesSites/gestion_plats/vendor/autoload.php';
 
-use Dotenv\Parser;
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
     /**
     * Database Connection
     */
