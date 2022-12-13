@@ -1,7 +1,7 @@
 import {EditButton} from "../buttons/EditButton.jsx";
 import {useState} from "react";
 import {EditDishModal} from "../modal/EditDishModal";
-import {EditDishhModal} from "../modal/EditDishhModal.jsx";
+import {EditDishModal} from "../modal/EditDishModal.jsx";
 
 export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
 
@@ -35,7 +35,7 @@ export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
                 idButton={data.id} />
         </div>
 
-        <EditDishhModal editModal={editModal}
+        <EditDishModal editModal={editModal}
                        setEditModal={setEditModal}
                        theDish={data}
                        setDatas={setDatas}
