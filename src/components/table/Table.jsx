@@ -1,7 +1,6 @@
 import add from "../../../public/assets/add.png"
 import logo from "../../../public/assets/logo.png";
 import {Link} from "react-router-dom";
-import { AddDishModal } from "../modal/AddDishModal.jsx"
 import {useState, useEffect} from "react";
 import { fetchDatas } from "../../utils/fetchDatas.js";
 import { DeleteButton } from '../buttons/DeleteButton.jsx'
@@ -11,6 +10,7 @@ import {ActionButton} from "../buttons/ActionButton.jsx";
 import {DishRow} from "./DishRow.jsx";
 import {handleCheckboxChange} from "../../utils/handleCheckboxChange.js";
 import {ModalFooter} from "../modal/modalComponents/ModalFooter.jsx";
+import {AddDishModal} from "../modal/AddDishModal.jsx";
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])

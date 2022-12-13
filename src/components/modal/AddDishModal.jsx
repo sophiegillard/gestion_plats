@@ -1,12 +1,18 @@
-import {useState, useEffect, useRef} from "react";
-import { fetchDatas } from "../../utils/fetchDatas.js";
-import axios from "axios";
-import {ActionButton} from "../buttons/ActionButton.jsx";
-import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
-import {SelectInputModal} from './modalComponents/SelectInputModal.jsx'
-import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
-import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {Formik, Form, Field, ErrorMessage, useFormikContext} from 'formik';
+import * as yup from 'yup';
 import {SuccessModal} from "./SuccessModal.jsx";
+import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
+import {SelectInputModal} from "./modalComponents/SelectInputModal.jsx";
+import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
+import {ActionButton} from "../buttons/ActionButton.jsx";
+import {useEffect, useRef, useState} from "react";
+import {fetchDatas} from "../../utils/fetchDatas.js";
+import axios from "axios";
+import {TextInputModalFormik} from "./modalComponents/TextInputModalFormik";
+import {SelectInputModalFormik} from "./modalComponents/SelectInputModalFormik.jsx";
+import {NumberInputModalFormik} from "./modalComponents/NumberInputModalFormik.jsx";
+import {ErrorModal} from "./ErrorModal";
 
 export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{
 
@@ -15,12 +21,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     const [fournisseurs, setFournisseurs] = useState([])
     const [isErrorMessage, setErrorMessage ] = useState (false)
     const [isSuccessModal, setSuccessModal] = useState(false)
-
-    /*    Declaration of the const*/
-    const dishName = useRef('');
-    const dishProvider = useRef('')
-    const dishCat = useRef('');
-    const dishPrice = useRef('');
+    const [showErrorModal, setErrorModal] = useState(false)
 
     useEffect(() => {
         const urlCategory= 'http://localhost:8888/api/category.php'
@@ -29,25 +30,20 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
         fetchDatas (setFournisseurs, urlFournisseur);
     }, []);
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e, name, provider, cat, price) =>{
         e.preventDefault();
-        if(dishName.current.value != '' && dishProvider.current.value != '' && dishCat.current.value != '' && dishPrice.current.value != ''){
-            const name = dishName.current.value;
-            const provider = dishProvider.current.value;
-            const cat = dishCat.current.value;
-            const price = dishPrice.current.value;
+        if(name != '' && provider != '' && cat != '' && price != ''){
 
             axios.post('http://localhost:8888/api/index.php', {
                 libellee: name,
-                prix: price,
                 fournisseur : provider,
-                categorie : cat
+                categorie : cat,
+                prix: price
             })
                 .then(function (response) {
                     const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
                     fetchDatas (setDatas,url);
                     SetModalOpen(false);
-                    e.target.reset();
                     setSuccessModal(true)
                 })
                 .catch(function (error) {
@@ -59,82 +55,127 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
         }
     }
 
+    // Declare the initial values of the form
+    const initialValues = {
+        dishName: '',
+        dishProvider: '',
+        dishCat: '',
+        dishPrice: 0
+    };
+
+    // Validation des inputs
+    const validationSchema = yup.object().shape({
+        dishName: yup.string('Veuillez insérer du text uniquement.')
+                    .required('Veuillez indiquer le libellé.')
+                    .min(3, "Veuillez insérer minimum 3 caractères.")
+                    .matches(/^[a-zA-Z0-9,'\-/\s]+$/, 'Le libellé ne doit pas contenir de caractères spéciaux'),
+        dishCat: yup.string('Veuillez insérer du text uniquement.')
+                    .required('Veuillez indiquer la catégorie.'),
+        dishProvider: yup.string('Veuillez insérer du text uniquement.')
+                    .required('Veuillez indiquer le fournisseur.'),
+        dishPrice: yup.number('Veuillez entrer uniquement des chiffres.')
+                    .required('Veuillez indiquer le prix.')
+                    .positive('Veuillez indiquer un prix correct.'),
+
+    });
+
     return <>
 
-    <SuccessModal
-        modalState={isSuccessModal}
-        action={()=>setSuccessModal(false)}
-        successMessage={'Le plat a bien été sauvegardé.'}/>
+        <SuccessModal
+            modalState={isSuccessModal}
+            action={()=>setSuccessModal(false)}
+            successMessage={'Le plat a bien été sauvegardé.'}/>
 
-    <dialog open={isModalOpen}
-            className="bg-black bg-opacity-60 h-full w-screen absolute top-0 scroll-none backdrop-blur-sm">
+        <ErrorModal
+            modalState={showErrorModal}
+            action={()=>setErrorModal(false)}
+            errorMessage={'Veuillez suivre les instructions du formulaire.'} />
 
-        <div className="flex justify-center">
+        <dialog open={isModalOpen}
+                className="bg-black bg-opacity-60 h-full w-screen absolute top-0 scroll-none backdrop-blur-sm">
 
-            <form action="src/components/modal/AddDishModal.jsx"
-                  method="dialog"
-                  className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 max-sm:w-[99%]"
-                  onSubmit={(e)=>handleSubmit(e)}>
+            <div className="flex justify-center">
 
-                {/*Header Modal*/}
-                <div className="flex justify-between border-b-2 p-4">
-                    <h3 className="text-xl">Ajout d'un plat</h3>
-                    <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
-                </div>
-                {/*End Header Modal*/}
+                <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={(values, { setSubmitting, resetForm }) =>{
+                    console.log(values);
+                    setSubmitting(false);}}
+                >
 
-                {/*Body Modal*/}
-                <div className="px-4 flex flex-col gap-4 my-4">
+                {formik => (
+                    <form action="src/components/modal/AddDishModalDELETE.jsx"
+                          method="dialog"
+                          className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 max-sm:w-[99%]">
 
-                    <TextInputModal
-                        label={'Libellé du plat'}
-                        forwardRef={dishName} />
+                        {/*Header Modal*/}
+                        <div className="flex justify-between border-b-2 p-4">
+                            <h3 className="text-xl">Ajout d'un plat</h3>
+                            <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
+                        </div>
+                        {/*End Header Modal*/}
 
-                    <SelectInputModal
-                        label={'Famille du plat'}
-                        forwardRef={dishCat}
-                        optionText={'Veuillez selectionner une famille de plat'}
-                        arrayToDisplay={categories}
-                        />
+                        {/*Body Modal*/}
+                        <div className="px-4 flex flex-col gap-4 my-4">
 
-                    <SelectInputModal
-                        label={'Fournisseur'}
-                        forwardRef={dishProvider}
-                        optionText={'Veuillez selectionner un fournisseur'}
-                        arrayToDisplay={fournisseurs}
-                        />
+                            <TextInputModalFormik
+                                label={'Libellé du plat'}
+                                fieldName={"dishName"}/>
 
-                    <NumberInputModal
-                        label={'Prix'}
-                        forwardRef={dishPrice}
-                        inputLabel={'Prix du plat'}/>
+                            <SelectInputModalFormik
+                                label={'Fournisseur'}
+                                fieldName={'dishProvider'}
+                                defaultOption={'Veuillez selectionner un fournisseur'}
+                                arrayToDisplay={fournisseurs}  />
 
-                        {isErrorMessage &&
-                            <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2" role="alert">
-                                <p>Veuillez compléter tous les champs pour valider</p>
-                            </div>
-                        }
+                            <SelectInputModalFormik
+                                label={'Catégorie'}
+                                fieldName={'dishCat'}
+                                defaultOption={'Veuillez selectionner une catégorie'}
+                                arrayToDisplay={categories}  />
 
-                </div>
-                {/*END Body Modal*/}
+                            <NumberInputModalFormik
+                                label="Prix"
+                                fieldName="dishPrice" />
+
+                            {isErrorMessage &&
+                                <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2" role="alert">
+                                    <p>Veuillez compléter tous les champs pour valider</p>
+                                </div>
+                            }
+
+                        </div>
+                        {/*END Body Modal*/}
 
 
-                {/* footer Modal*/}
-                <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
-                    <button type="button"
-                            onClick={() => SetModalOpen(false)}
-                            value="cancel">Annuler</button>
+                        {/* footer Modal*/}
+                        <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
+                            <button type="button"
+                                    onClick={() => SetModalOpen(false)}
+                                    value="cancel">Annuler</button>
 
-                    <ActionButton
-                        isIconNeeded={false}
-                        label={'Ajouter'}
-                        bgColor={'bg-green-button'} bgColorHover={'bg-purple-button-hover'}
-                        />
-                </div>
-                {/*END footer Modal*/}
+                            <ActionButton
+                                onClickAction={(e) => {
+                                    if (formik.isValid) {
+                                        handleSubmit(e, formik.values.dishName, formik.values.dishProvider, formik.values.dishCat, formik.values.dishPrice);
+                                        formik.resetForm();
+                                    } else{
+                                        setErrorModal(true)
+                                    }
+                                }}
+                                isIconNeeded={false}
+                                label={'Ajouter'}
+                                bgColor={'bg-green-button'} bgColorHover={'bg-purple-button-hover'}
+                            />
+                        </div>
+                        {/*END footer Modal*/}
 
-            </form>
-        </div>
-    </dialog>
+                    </form>
+                )}
+                </Formik>
+            </div>
+        </dialog>
     </>
-}
+
+};
