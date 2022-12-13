@@ -1,10 +1,12 @@
-import close from "../../../../public/assets/close.png";
+import close from "../../../public/assets/close.png";
 
 export const CloseButton = ({onClickAction}) =>{
 
     return <>
         <button type="button">
-            <img src={close} alt="close button" className="h-4"
+            <img src={close}
+                 alt="close button"
+                 className="h-4"
                  onClick={onClickAction}/>
         </button>
     </>

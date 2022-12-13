@@ -6,7 +6,7 @@ export const Home = () => {
     return (
 
     <div className="bg-gradient-to-br from-light-blue to-dark-blue h-screen w-screen flex justify-center items-center">
-        <div className="w-[80%] h-3/4 flex flex-col justify-center gap-20">
+        <div className="w-[80%] h-3/4 flex flex-col justify-center gap-10">
 
             <div className="max-w-fit h-fit self-center">
                 <img src={logo} alt='logo' className="w-60" />
