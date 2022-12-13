@@ -121,7 +121,8 @@ export const Table = () =>{
                 <ModalFooter pageNumber={pageNumber}
                              setPageNumber={setPageNumber}
                              setDatas={setDatas}
-                             datas={datas}/>
+                             datas={datas}
+                             setDeleteButton={setDeleteButton}/>
 
             </div>
 

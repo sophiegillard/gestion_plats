@@ -1,6 +1,6 @@
 import {ErrorMessage, Field} from "formik";
 
-export const SelectInputModalFormik = ({label, defaultOption, arrayToDisplay, fieldName, value, onChangeAction}) =>{
+export const SelectInputEdit = ({label, defaultOption, arrayToDisplay, fieldName, value, onChangeAction}) =>{
     return(
         <div className="flex flex-col gap-2">
             <label htmlFor="dishProvider">{label}</label>

@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import {fetchDatas} from "../../utils/fetchDatas.js";
 import axios from "axios";
-import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {CloseButton} from "../buttons/CloseButton.jsx";
 import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
 import {SelectInputModal} from "./modalComponents/SelectInputModal.jsx";
 import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";

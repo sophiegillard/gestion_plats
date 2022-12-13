@@ -5,7 +5,7 @@ import {ActionButton} from "../buttons/ActionButton.jsx";
 import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
 import {SelectInputModal} from './modalComponents/SelectInputModal.jsx'
 import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
-import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {CloseButton} from "../buttons/CloseButton.jsx";
 import {SuccessModal} from "./SuccessModal.jsx";
 
 export const AddDishModalDELETE = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{

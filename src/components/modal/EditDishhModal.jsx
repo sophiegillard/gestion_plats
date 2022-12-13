@@ -3,14 +3,14 @@ import * as yup from "yup";
 import {Formik, Form, Field, ErrorMessage, useFormikContext} from 'formik';
 import {useEffect, useRef, useState} from "react";
 import {fetchDatas} from "../../utils/fetchDatas.js";
-import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {CloseButton} from "../buttons/CloseButton.jsx";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 import {SuccessModal} from "./SuccessModal.jsx";
 import {updateDish} from "../../utils/updateDish.js";
 import {ErrorModal} from "./ErrorModal.jsx";
-import {TextInputModalFormik} from "./modalComponents/TextInputModalFormik.jsx";
-import {SelectInputModalFormik} from "./modalComponents/SelectInputModalFormik.jsx";
-import {NumberInputModalFormik} from "./modalComponents/NumberInputModalFormik.jsx";
+import {TextInputEdit} from "./EditFormComponent/TextInputEdit.jsx";
+import {SelectInputEdit} from "./EditFormComponent/SelectInputEdit.jsx";
+import {NumberInputEdit} from "./EditFormComponent/NumberInputEdit.jsx";
 
 export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, datas, pageNumber}) =>{
 
@@ -18,6 +18,7 @@ export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, data
     const [categories, setCategories] = useState([])
     const [fournisseurs, setFournisseurs] = useState([])
     const [showErrorModal, setErrorModal] = useState(false)
+    const [showErrorMessageEdit, setErrorMessageEdit ] = useState (false)
 
 
     useEffect(() => {
@@ -42,14 +43,16 @@ export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, data
                 fetchDatas (setDatas,url);
                 setSuccessUpdateModal(true)
                 setEditModal(false)
+                setErrorMessageEdit(false)
             })
             .catch(function (error) {
-                console.log(error);
+                e.preventDefault();
+                setErrorMessageEdit(true)
             });
     }
 
 
-    // Declare the initial values of the form
+    // Declare the initial values of the AddFormComponent
     const initialValues = {
         dishName: theDish.libellee,
         dishProvider: theDish.nomFrn,
@@ -100,7 +103,7 @@ export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, data
                         setSubmitting(false);}}
                 >
 
-                {({ values, handleSubmit, setFieldValue, isValid }) =>{
+                {({ values, handleSubmit, setFieldValue, isValid, resetForm }) =>{
                     return (
                     <form
 
@@ -111,48 +114,65 @@ export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, data
                         {/*Header Modal*/}
                         <div className="flex justify-between border-b-2 p-4">
                             <h3 className="text-xl">Modification d'un plat</h3>
-                            <CloseButton onClickAction={() => setEditModal(false)} />
+                            <CloseButton onClickAction={(e) =>{
+                                e.preventDefault()
+                                setEditModal(false)
+                                setErrorMessageEdit(false)
+                                resetForm()}
+                            }
+                            />
                         </div>
                         {/*End Header Modal*/}
 
                         {/*Body Modal*/}
                         <div className="px-4 flex flex-col gap-4 my-4">
 
-                            <TextInputModalFormik
+                            <TextInputEdit
                                 label={'Libellé du plat'}
                                 fieldName={"dishName"}
                                 value={values.dishName}
                                 onChangeAction={(e) =>{
+                                    e.propertyIsEnumerable()
                                     setFieldValue('dishName', e.target.value)
                                     console.log(values.dishName)}} />
 
-                            <SelectInputModalFormik
+                            <SelectInputEdit
                                 label={'Fournisseur'}
                                 fieldName={'dishProvider'}
                                 defaultOption={'Veuillez selectionner un fournisseur'}
                                 arrayToDisplay={fournisseurs}
                                 value={values.dishProvider}
                                 onChangeAction={(e) =>{
+                                    e.preventDefault()
                                     setFieldValue('dishProvider', e.target.value)
                                     console.log(values.dishProvider)}}/>
 
-                            <SelectInputModalFormik
+                            <SelectInputEdit
                                 label={'Catégorie'}
                                 fieldName={'dishCat'}
                                 defaultOption={'Veuillez selectionner une catégorie'}
                                 arrayToDisplay={categories}
                                 value={values.dishCat}
                                 onChangeAction={(e) =>{
+                                    e.preventDefault()
                                     setFieldValue('dishCat', e.target.value)
                                     console.log(values.dishCat)}}/>
 
-                            <NumberInputModalFormik
+                            <NumberInputEdit
                                 label="Prix"
                                 fieldName="dishPrice"
                                 value={values.dishPrice}
                                 onChangeAction={(e) =>{
+                                    e.preventDefault()
                                     setFieldValue('dishPrice', e.target.value)
                                     console.log(values.dishPrice)}}/>
+
+                            {showErrorMessageEdit &&
+                                <div className="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-2" role="alert">
+                                    <p>Veuillez suivre les indications pour valider les modifications.</p>
+                                </div>
+                            }
+
 
                         </div>
                         {/*END Body Modal*/}
@@ -161,16 +181,22 @@ export const EditDishhModal = ({editModal, setEditModal, theDish, setDatas, data
                         <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
                             <button type="submit"
                                     value="cancel"
-                                    onClick={() => setEditModal(false)}>Annuler</button>
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        setEditModal(false),
+                                        setErrorMessageEdit(false)
+                                        resetForm()
+                                    }}>Annuler</button>
 
                             <ActionButton
                                 onClickAction={(e) => {
                                     if (isValid) {
-                                        console.log('handle')
+                                        e.preventDefault()
                                         handleSubmitEdit(e, values.dishName, values.dishCat, values.dishProvider, values.dishPrice);
-                                        console.log(values.dishName, values.dishCat, values.dishProvider, values.dishPrice)
+                                        resetForm()
                                     }else{
-                                        setErrorModal(true)
+                                        e.preventDefault()
+                                        setErrorMessageEdit(true)
                                     }
                                 }}
                                 isIconNeeded={false}

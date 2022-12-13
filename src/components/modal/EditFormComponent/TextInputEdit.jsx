@@ -1,6 +1,6 @@
 import {ErrorMessage, Field} from "formik";
 
-export const TextInputModalFormik = ({label, fieldName, value, onChangeAction, isEditModal}) =>{
+export const TextInputEdit = ({label, fieldName, value, onChangeAction, isEditModal}) =>{
     return (
     <div className="flex flex-col gap-2">
         <label htmlFor="dishName">{label}</label>

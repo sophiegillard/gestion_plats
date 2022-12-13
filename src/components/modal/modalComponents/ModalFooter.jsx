@@ -8,7 +8,7 @@ import {fetchDatas} from "../../../utils/fetchDatas.js";
 import axios from "axios";
 
 
-export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
+export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButton}) =>{
     const[lastPage, setLastPageIndex] = useState()
 
 
@@ -30,7 +30,8 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
     const setLastPage = () =>{
         setPageNumber(lastPage);
         const url= `http://localhost:8888/api/index.php?currentPage=${lastPage}`;
-        fetchDatas (setDatas,url);}
+        fetchDatas (setDatas,url);
+        setDeleteButton('hidden')}
 
 
     const setNextPage = () =>{
@@ -38,7 +39,8 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
             const updatedPageNumber = pageNumber + 1
             setPageNumber(updatedPageNumber)
             const url= `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
-            fetchDatas (setDatas,url);}
+            fetchDatas (setDatas,url);
+            setDeleteButton('hidden');}
     }
 
     const setPreviousPage = () =>{
@@ -46,14 +48,16 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas}) =>{
             const updatedPageNumber = pageNumber - 1
             setPageNumber(updatedPageNumber)
             const url = `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
-            fetchDatas(setDatas, url);
+            fetchDatas(setDatas, url)
+            setDeleteButton('hidden');
         }
     }
 
     const setFirstPage = () =>{
         setPageNumber(1)
         const url= `http://localhost:8888/api/index.php?currentPage=1`;
-        fetchDatas (setDatas,url);
+        fetchDatas (setDatas,url)
+        setDeleteButton('hidden');
     }
 
 

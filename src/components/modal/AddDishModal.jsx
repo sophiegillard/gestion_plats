@@ -1,18 +1,15 @@
 import {Formik, Form, Field, ErrorMessage, useFormikContext} from 'formik';
 import * as yup from 'yup';
 import {SuccessModal} from "./SuccessModal.jsx";
-import {CloseButton} from "./modalComponents/CloseButton.jsx";
+import {CloseButton} from "../buttons/CloseButton.jsx";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 import {useEffect, useRef, useState} from "react";
 import {fetchDatas} from "../../utils/fetchDatas.js";
 import axios from "axios";
-import {TextInputModalFormik} from "./modalComponents/TextInputModalFormik";
-import {SelectInputModalFormik} from "./modalComponents/SelectInputModalFormik.jsx";
-import {NumberInputModalFormik} from "./modalComponents/NumberInputModalFormik.jsx";
 import {ErrorModal} from "./ErrorModal";
-import {TextInputAdd} from "./modalComponents/TextInputAdd";
-import {SelectInputAdd} from "./modalComponents/SelectInputAdd";
-import {NumberInputAdd} from "./modalComponents/NumberInputAdd";
+import {TextInputAdd} from "./AddFormComponent/TextInputAdd.jsx";
+import {SelectInputAdd} from "./AddFormComponent/SelectInputAdd";
+import {NumberInputAdd} from "./AddFormComponent/NumberInputAdd";
 
 export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{
 
@@ -56,7 +53,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
         }
     }
 
-    // Declare the initial values of the form
+    // Declare the initial values of the AddFormComponent
     const initialValuesCreate = {
         dishName: '',
         dishProvider: '',

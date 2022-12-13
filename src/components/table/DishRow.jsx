@@ -27,7 +27,12 @@ export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
         <div className="table-cell align-middle" data-label="Prix">{data.prix}</div>
 
         <div className="table-cell align-middle">
-            <EditButton onClickAction={()=>setEditModal(true)} idButton={data.id} />
+            <EditButton
+                onClickAction={(e)=>{
+                    e.preventDefault()
+                    setEditModal(true)
+                }}
+                idButton={data.id} />
         </div>
 
         <EditDishhModal editModal={editModal}
