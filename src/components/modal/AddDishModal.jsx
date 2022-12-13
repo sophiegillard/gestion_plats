@@ -53,7 +53,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     }
 
     // Declare the initial values of the form
-    const initialValues = {
+    const initialValuesCreate = {
         dishName: '',
         dishProvider: '',
         dishCat: '',
@@ -94,7 +94,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
             <div className="flex justify-center">
 
                 <Formik
-                initialValues={initialValues}
+                initialValues={initialValuesCreate}
                 validationSchema={validationSchema}
                 onSubmit={(values, { setSubmitting, resetForm }) =>{
                     console.log(values);
