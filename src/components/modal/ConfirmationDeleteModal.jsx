@@ -40,12 +40,12 @@ export const ConfirmationDeleteModal = ({warning, message, isDeleteModal, setDel
 
                     <div className="flex gap-4">
 
-                        <ActionButton
-                            isIconNeeded={false}
-                            onClickAction={()=>setDeleteModal(false)}
-                            label={"Annuler"}
-                            bgColor={'bg-light-grey text-font-main'} bgColorHover={'bg-light-grey-hover'}
-                            />
+                        <button type="button"
+                                onClick={()=>setDeleteModal(false)}
+                                className={`bg-light-grey text-font-main hover:bg-light-grey-hover rounded-sm 
+                                shadow-lg text-white px-4 py-2 flex flex-row gap-2 justify-center place-items-center`}>
+                            <span>Annuler</span>
+                        </button>
 
                         <ActionButton
                             isIconNeeded={false}

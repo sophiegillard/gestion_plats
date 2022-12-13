@@ -1,6 +1,6 @@
 import {ErrorMessage, Field} from "formik";
 
-export const NumberInputModalFormik = ({label, fieldName, value, onChangeAction}) =>{
+export const NumberInputAdd = ({label, fieldName}) =>{
     return(
         <div className="flex flex-col gap-2">
             <label htmlFor="dishPrice">{label}</label>
@@ -11,10 +11,8 @@ export const NumberInputModalFormik = ({label, fieldName, value, onChangeAction}
                    step="any"
                    name={fieldName}
                    id={fieldName}
-                   value={value}
-                   onChange={onChangeAction}
             />
-            <ErrorMessage className="text-red-500 text-xs" name={fieldName} component="div"/>
+            <ErrorMessage className="text-orange-700 text-xs" name={fieldName} component="div"/>
         </div>
     )
 }

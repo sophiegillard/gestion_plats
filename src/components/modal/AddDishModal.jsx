@@ -10,6 +10,9 @@ import {TextInputModalFormik} from "./modalComponents/TextInputModalFormik";
 import {SelectInputModalFormik} from "./modalComponents/SelectInputModalFormik.jsx";
 import {NumberInputModalFormik} from "./modalComponents/NumberInputModalFormik.jsx";
 import {ErrorModal} from "./ErrorModal";
+import {TextInputAdd} from "./modalComponents/TextInputAdd";
+import {SelectInputAdd} from "./modalComponents/SelectInputAdd";
+import {NumberInputAdd} from "./modalComponents/NumberInputAdd";
 
 export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{
 
@@ -42,6 +45,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                     fetchDatas (setDatas,url);
                     SetModalOpen(false);
                     setSuccessModal(true)
+                    setErrorMessage(false)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -101,7 +105,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                     setSubmitting(false);}}
                 >
 
-                {({ formik, isValid }) => (
+                {formik => (
                     <form action="src/components/modal/AddDishModal.jsx"
                           method="dialog"
                           className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 max-sm:w-[99%]">
@@ -109,30 +113,33 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                         {/*Header Modal*/}
                         <div className="flex justify-between border-b-2 p-4">
                             <h3 className="text-xl">Ajout d'un plat</h3>
-                            <CloseButton onClickAction={() =>{ SetModalOpen(false), setErrorMessage(false)}} />
+                            <CloseButton onClickAction={() =>{
+                                SetModalOpen(false),
+                                setErrorMessage(false),
+                                formik.resetForm()}} />
                         </div>
                         {/*End Header Modal*/}
 
                         {/*Body Modal*/}
                         <div className="px-4 flex flex-col gap-4 my-4">
 
-                            <TextInputModalFormik
+                            <TextInputAdd
                                 label={'Libellé du plat'}
                                 fieldName={"dishName"}/>
 
-                            <SelectInputModalFormik
+                            <SelectInputAdd
                                 label={'Fournisseur'}
                                 fieldName={'dishProvider'}
                                 defaultOption={'Veuillez selectionner un fournisseur'}
                                 arrayToDisplay={fournisseurs}  />
 
-                            <SelectInputModalFormik
+                            <SelectInputAdd
                                 label={'Catégorie'}
                                 fieldName={'dishCat'}
                                 defaultOption={'Veuillez selectionner une catégorie'}
                                 arrayToDisplay={categories}  />
 
-                            <NumberInputModalFormik
+                            <NumberInputAdd
                                 label="Prix"
                                 fieldName="dishPrice" />
 
@@ -149,16 +156,20 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                         {/* footer Modal*/}
                         <div className="px-4 bg-light-grey flex gap-4 justify-end p-4">
                             <button type="button"
-                                    onClick={() => SetModalOpen(false)}
+                                    onClick={() => {
+                                        SetModalOpen(false),
+                                        setErrorMessage(false),
+                                        formik.resetForm()}}
                                     value="cancel">Annuler</button>
 
                             <ActionButton
                                 onClickAction={(e) => {
-                                    if (isValid) {
+                                    if (formik.isValid) {
                                         handleSubmit(e, formik.values.dishName, formik.values.dishProvider, formik.values.dishCat, formik.values.dishPrice);
                                         formik.resetForm();
                                     } else{
-                                        setErrorModal(true)
+                                        e.preventDefault()
+                                        setErrorMessage(true)
                                     }
                                 }}
                                 isIconNeeded={false}
