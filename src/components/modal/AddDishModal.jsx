@@ -2,9 +2,6 @@ import {Formik, Form, Field, ErrorMessage, useFormikContext} from 'formik';
 import * as yup from 'yup';
 import {SuccessModal} from "./SuccessModal.jsx";
 import {CloseButton} from "./modalComponents/CloseButton.jsx";
-import {TextInputModal} from "./modalComponents/TextInputModal.jsx";
-import {SelectInputModal} from "./modalComponents/SelectInputModal.jsx";
-import {NumberInputModal} from "./modalComponents/NumberInputModal.jsx";
 import {ActionButton} from "../buttons/ActionButton.jsx";
 import {useEffect, useRef, useState} from "react";
 import {fetchDatas} from "../../utils/fetchDatas.js";
@@ -104,8 +101,8 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
                     setSubmitting(false);}}
                 >
 
-                {formik => (
-                    <form action="src/components/modal/AddDishModalDELETE.jsx"
+                {({ formik, isValid }) => (
+                    <form action="src/components/modal/AddDishModal.jsx"
                           method="dialog"
                           className="bg-white shadow-xl p-0 w-[40%] h-fit text-font-main mt-28 max-sm:w-[99%]">
 
@@ -157,7 +154,7 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
 
                             <ActionButton
                                 onClickAction={(e) => {
-                                    if (formik.isValid) {
+                                    if (isValid) {
                                         handleSubmit(e, formik.values.dishName, formik.values.dishProvider, formik.values.dishCat, formik.values.dishPrice);
                                         formik.resetForm();
                                     } else{

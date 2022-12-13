@@ -14,7 +14,7 @@ export const ErrorModal = ({modalState, action, errorMessage}) => {
                       method="dialog"
                       className="bg-white text-font-main flex flex-col justify-center items-center p-8 gap-6 mt-28">
 
-                    <img src={error} alt="opération annulée" className="w-24"/>
+                    <img src={error} alt="Opération annulée" className="w-24"/>
 
                     <div className="text-center flex flex-col gap-4">
                         <p className="text-3xl font-medium">Opération annulée !</p>
