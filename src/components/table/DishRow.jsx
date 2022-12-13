@@ -1,7 +1,6 @@
 import {EditButton} from "../buttons/EditButton.jsx";
 import {useState} from "react";
 import {EditDishModal} from "../modal/EditDishModal";
-import {EditDishModal} from "../modal/EditDishModal.jsx";
 
 export const DishRow = ({data, onChangeAction ,setDatas, datas, pageNumber}) =>{
 
