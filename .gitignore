@@ -25,5 +25,3 @@ dist-ssr
 
 # misc
 .env
-
-dist/output.css
