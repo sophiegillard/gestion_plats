@@ -108,15 +108,9 @@ INSERT INTO `plat` (`id`, `libellee`, `prix`, `fournisseur`, `categorie`, `check
 (240, 'Pizza 4 saisons', '6.00', 2, 2, 0),
 (241, 'Hachis parmentier', '6.20', 2, 2, 0),
 (242, 'Soupe courgette', '1.50', 1, 2, 0),
-(268, 'name', '9.00', 2, 1, 0),
-(272, 'porito', '2.00', 1, 1, 0),
 (273, 'purée', '2.00', 2, 2, 0),
-(274, 'purée', '2.00', 2, 2, 0),
-(275, 'puréell', '2.00', 2, 2, 0),
 (277, 'tomate mozza', '2.00', 1, 1, 0),
 (278, 'pates pesto', '2.00', 1, 1, 0),
-(284, 'test', '2.00', 1, 1, 0),
-(285, 'eeer', '1.00', 2, 1, 0),
 (286, 'tranches', '2.00', 1, 3, 0),
 (299, 'crepes', '100.00', 2, 2, 0);
 

@@ -10,7 +10,9 @@
 
 
 ## Link to the actual site
-[Gestion Plats](https://gestionplats.netlify.app/)
+Come check an overview of my project. Please note that it is not possible to delete or edit datas as the host doesn't allow those permissions.
+It is only possible to add new datas and display all datas.
+[Gestion Plats](https://gestiondeplats.000webhostapp.com/)
 
 ## Description
 Full Stack Project - CRUD TABLE
