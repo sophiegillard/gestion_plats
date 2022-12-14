@@ -27,6 +27,7 @@ Front-end was realized with React and Tailwind.
 
 ## How to install the project
 - Clone the repository in your IDE
+- In terminal : cd gestion_plats
 - In your terminal execute : 
   - npm install
   - npm run dev
