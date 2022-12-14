@@ -9,11 +9,6 @@
 ![GUMP](https://img.shields.io/badge/-GUMP-beige)
 
 
-## Link to the actual site
-Come check an overview of my project. Please note that it is not possible to delete or edit datas as the host doesn't allow those permissions.
-It is only possible to add new datas and display all datas.
-[Gestion Plats](https://gestiondeplats.000webhostapp.com/)
-
 ## Description
 Full Stack Project - CRUD TABLE
 
@@ -32,18 +27,26 @@ Front-end was realized with React and Tailwind.
 
 ## How to install the project
 - Clone the repository in your IDE
-- In your terminal execute : npm install
-- then npm run dev
-- then npx tailwindcss -i ./src/style/index.css -o ./src/dist/output.css --watch
+- In your terminal execute : 
+  - npm install
+  - npm run dev
+  - npx tailwindcss -i ./src/style/index.css -o ./src/dist/output.css --watch
 
-- Download the db file and import it in Mysql
-  - create a table named "schoolDish"
-- start Mysql on port localhost port 8888
-- in the document api/DbConnection set your username and password
+- For the database: 
+  - Download the db file 'DB_schoolDish' 
+  - Start Mysql on port localhost port 8888
+  - In MySql create a table named "schoolDish"
+  - In this new table, import the sql request from 'DB_schoolDish'
+  - In the document api/DbConnection set your username and password
 
 ## Context
 This project has been realized on December 2022 while I was doing a 7-month boot camp.
 This project aim to test my abilities in doing a full stack project.
+
+## Link to the actual site
+Come check an overview of my project. Please note that it is not possible to delete or edit datas as the free web host doesn't allow it.
+It is only possible to display all datas and add new ones.
+[Gestion Plats](https://gestiondeplats.000webhostapp.com/)
 
 ## What's to improve?
 There is no searchbar so far. 
