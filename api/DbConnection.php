@@ -5,7 +5,7 @@
     class DbConnection {
         public function connect(){
         $host = 'localhost';
-        $dbname = 'apschool';
+        $dbname = 'schoolDish';
         $username = 'sophro';
         $password = '123';
 

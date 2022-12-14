@@ -28,6 +28,17 @@ Back-end validation was handled with GUMP.
 
 Front-end was realized with React and Tailwind.
 
+## How to install the project
+- Clone the repository in your IDE
+- In your terminal execute : npm install
+- then npm run dev
+- then npx tailwindcss -i ./src/style/index.css -o ./src/dist/output.css --watch
+
+- Download the db file and import it in Mysql
+  - create a table named "schoolDish"
+- start Mysql on port localhost port 8888
+- in the document api/DbConnection set your username and password
+
 ## Context
 This project has been realized on December 2022 while I was doing a 7-month boot camp.
 This project aim to test my abilities in doing a full stack project.
