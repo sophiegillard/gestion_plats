@@ -1,5 +1,5 @@
 <?php
-require '/Applications/MAMP/mesSites/gestion_plats/vendor/autoload.php';
+require '/Applications/MAMP/mesSites/gestion_plats_AP/gestion_plats/vendor/autoload.php';
 
     header('Access-Control-Allow-Origin: *');
     header("Access-Control-Allow-Headers: *");
