@@ -10,7 +10,7 @@
 
 
 ## Link to the actual site
-[Jungle house](https://junglehouse-project.netlify.app/)
+[Gestion Plats](https://gestionplats.netlify.app/)
 
 ## Description
 Full Stack Project - CRUD TABLE
@@ -38,6 +38,5 @@ A page to handle providers and categories could be added.
 
 
 ## Overview of the project
-![Overview1](public/assets/images/overview1.png)
-![Overview2](public/assets/images/overview2.png)
-![Overview3](public/assets/images/overview3.png)
+![Overview1](public/assets/gestionplatoverview1.png)
+![Overview2](public/assets/gestionplatoverview2.png)
