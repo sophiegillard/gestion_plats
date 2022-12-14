@@ -5,9 +5,9 @@
     class DbConnection {
         public function connect(){
         $host = 'localhost';
-        $dbname = 'apschool';
-        $username = 'sophro';
-        $password = '123';
+        $dbname = 'schoolDish';
+        $username = '';
+        $password = '';
 
         try {
             $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
