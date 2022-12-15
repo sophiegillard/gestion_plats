@@ -22,7 +22,7 @@ export const Table = () =>{
     let checkIfCheckBoxAreCheck = isCheckbox();
      
     useEffect(() => {
-        const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`;
+        const url= `/api/index.php?currentPage=${pageNumber}`;
         fetchDatas (setDatas,url);
     }, []);
 

@@ -22,8 +22,8 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
 
 
     useEffect(() => {
-        fetchDatas (setCategories,'http://localhost:8888/api/category.php');
-        fetchDatas (setFournisseurs, 'http://localhost:8888/api/fournisseur.php');
+        fetchDatas (setCategories,'/api/category.php');
+        fetchDatas (setFournisseurs, '/api/fournisseur.php');
         setEditModal(false)
     }, []);
 
@@ -36,10 +36,10 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
 
         updateDish(setDatas, datas, id, updatedDish)
 
-        axios.put(`http://localhost:8888/api/index.php/${id}/update`, updatedDish)
+        axios.put(`/api/index.php/${id}/update`, updatedDish)
             .then(function(response){
                 console.log(response)
-                const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
+                const url= `/api/index.php?currentPage=${pageNumber}`
                 fetchDatas (setDatas,url);
                 setSuccessUpdateModal(true)
                 setEditModal(false)

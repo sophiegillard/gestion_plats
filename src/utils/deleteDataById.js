@@ -10,11 +10,11 @@ export const deleteDataByID = async ({setDatas, pageNumber}, e) => {
 
         // Delete each item
         for (const id of arrayIds) {
-            await axios.delete(`http://localhost:8888/api/index.php/${id}`);
+            await axios.delete(`/api/index.php/${id}`);
         }
 
         // Fetch updated data from the API
-        const url = `http://localhost:8888/api/index.php?currentPage=${pageNumber}`;
+        const url = `/api/index.php?currentPage=${pageNumber}`;
         fetchDatas(setDatas, url);
     } catch (error) {
         // Display an error message to the user

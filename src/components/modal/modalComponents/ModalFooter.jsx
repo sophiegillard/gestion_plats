@@ -29,7 +29,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
 
     const setLastPage = () =>{
         setPageNumber(lastPage);
-        const url= `http://localhost:8888/api/index.php?currentPage=${lastPage}`;
+        const url= `/api/index.php?currentPage=${lastPage}`;
         fetchDatas (setDatas,url);
         setDeleteButton('hidden')}
 
@@ -38,7 +38,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
         if(pageNumber !== lastPage){
             const updatedPageNumber = pageNumber + 1
             setPageNumber(updatedPageNumber)
-            const url= `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
+            const url= `/api/index.php?currentPage=${updatedPageNumber}`;
             fetchDatas (setDatas,url);
             setDeleteButton('hidden');}
     }
@@ -47,7 +47,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
         if (pageNumber !== 1) {
             const updatedPageNumber = pageNumber - 1
             setPageNumber(updatedPageNumber)
-            const url = `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
+            const url = `/index.php?currentPage=${updatedPageNumber}`;
             fetchDatas(setDatas, url)
             setDeleteButton('hidden');
         }
@@ -55,7 +55,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
 
     const setFirstPage = () =>{
         setPageNumber(1)
-        const url= `http://localhost:8888/api/index.php?currentPage=1`;
+        const url= `/api/index.php?currentPage=1`;
         fetchDatas (setDatas,url)
         setDeleteButton('hidden');
     }
