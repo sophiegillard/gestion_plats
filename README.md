@@ -29,10 +29,10 @@ Front-end was realized with React and Tailwind.
 - Clone the repository in your IDE
 - In terminal : cd gestion_plats
 - In your terminal execute : 
+  - composer install
   - npm install
   - npm run dev
   - npx tailwindcss -i ./src/style/index.css -o ./src/dist/output.css --watch
-  - composer install
 
 - For the database: 
   - Download the db file 'DB_schoolDish' 
