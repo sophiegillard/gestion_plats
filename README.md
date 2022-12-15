@@ -7,6 +7,7 @@
 ![Formik](https://img.shields.io/badge/-Formik-purple)
 ![PHP](https://img.shields.io/badge/-PHP-pink)
 ![GUMP](https://img.shields.io/badge/-GUMP-beige)
+![Mysql](https://img.shields.io/badge/-MySql-brown)
 
 
 ## Description
