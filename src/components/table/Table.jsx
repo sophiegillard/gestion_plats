@@ -1,5 +1,5 @@
-import add from "../../../public/assets/add.png"
-import logo from "../../../public/assets/logo.png";
+import add from "../../assets/add.png"
+import logo from "../../assets/logo.png";
 import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import { fetchDatas } from "../../utils/fetchDatas.js";
@@ -11,6 +11,7 @@ import {DishRow} from "./DishRow.jsx";
 import {handleCheckboxChange} from "../../utils/handleCheckboxChange.js";
 import {ModalFooter} from "../modal/modalComponents/ModalFooter.jsx";
 import {AddDishModal} from "../modal/AddDishModal.jsx";
+import {port, setUrlCurrentPage} from "../../../setUrl.js"
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -22,7 +23,7 @@ export const Table = () =>{
     let checkIfCheckBoxAreCheck = isCheckbox();
      
     useEffect(() => {
-        const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`;
+        const url= setUrlCurrentPage(port, pageNumber);
         fetchDatas (setDatas,url);
     }, []);
 
@@ -95,7 +96,7 @@ export const Table = () =>{
                             </div>
                         </div>
 
-                        <div className="table-row-group flex justify-between">
+                        <div className="table-row-group justify-between">
                             {datas.map((data)=>
                                 <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 max-sm:h-16">
 

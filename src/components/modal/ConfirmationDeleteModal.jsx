@@ -1,4 +1,4 @@
-import attention from "../../../public/assets/attention.png"
+import attention from "../../assets/attention.png"
 import {useState} from "react";
 import {SuccessModal} from "./SuccessModal.jsx";
 import {deleteDataByID} from "../../utils/deleteDataById.js";

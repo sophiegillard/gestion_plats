@@ -10,6 +10,7 @@ import {ErrorModal} from "./ErrorModal";
 import {TextInputAdd} from "./AddFormComponent/TextInputAdd.jsx";
 import {SelectInputAdd} from "./AddFormComponent/SelectInputAdd";
 import {NumberInputAdd} from "./AddFormComponent/NumberInputAdd";
+import {port, setUrlCategory, setUrlCurrentPage, setUrlFournisseur, setUrlIndex} from "../../../setUrl.js";
 
 export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) =>{
 
@@ -21,8 +22,8 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     const [showErrorModal, setErrorModal] = useState(false)
 
     useEffect(() => {
-        const urlCategory= 'http://localhost:8888/api/category.php'
-        const urlFournisseur= 'http://localhost:8888/api/fournisseur.php'
+        const urlCategory= setUrlCategory(port)
+        const urlFournisseur= setUrlFournisseur(port)
         fetchDatas (setCategories, urlCategory);
         fetchDatas (setFournisseurs, urlFournisseur);
     }, []);
@@ -30,16 +31,17 @@ export const AddDishModal = ({isModalOpen, SetModalOpen, setDatas, pageNumber}) 
     const handleSubmit = (e, name, provider, cat, price) =>{
         e.preventDefault();
         if(name != '' && provider != '' && cat != '' && price != ''){
+        const urlIndex = setUrlIndex(port)
 
-            axios.post('http://localhost:8888/api/index.php', {
+            axios.post(urlIndex, {
                 libellee: name,
                 fournisseur : provider,
                 categorie : cat,
                 prix: price
             })
                 .then(function (response) {
-                    const url= `http://localhost:8888/api/index.php?currentPage=${pageNumber}`
-                    fetchDatas (setDatas,url);
+                    const urlPageIndex= setUrlCurrentPage(port, pageNumber)
+                    fetchDatas (setDatas,urlPageIndex);
                     SetModalOpen(false);
                     setSuccessModal(true)
                     setErrorMessage(false)

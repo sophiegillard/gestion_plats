@@ -1,4 +1,4 @@
-import edit from "../../../public/assets/edit.png";
+import edit from "../../assets/edit.png";
 
 export const EditButton = ({onClickAction, idButton}) =>{
 

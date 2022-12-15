@@ -35,19 +35,15 @@ Front-end was realized with React and Tailwind.
 
 - For the database: 
   - Download the db file 'DB_schoolDish' 
-  - Start Mysql on port localhost port 8888
+  - Start Mysql 
   - In MySql create a table named "schoolDish"
   - In this new table, import the sql request from 'DB_schoolDish'
   - In the document api/DbConnection set your username and password
+  - In the file 'setUrl.js' change the port to your mysql port.
 
 ## Context
 This project has been realized on December 2022 while I was doing a 7-month boot camp.
-This project aim to test my abilities in doing a full stack project.
-
-## Link to the actual site
-Come check an overview of my project. Please note that it is not possible to delete or edit datas as the free web host doesn't allow it.
-It is only possible to display all datas and add new ones.
-[Gestion Plats](https://gestiondeplats.000webhostapp.com/)
+This project aims to test my abilities in doing a full stack project.
 
 ## What's to improve?
 There is no searchbar so far. 
@@ -56,5 +52,5 @@ A page to handle providers and categories could be added.
 
 
 ## Overview of the project
-![Overview1](public/assets/gestionplatoverview1.png)
-![Overview2](public/assets/gestionplatoverview2.png)
+![Overview1](src/assets/gestionplatoverview1.png)
+![Overview2](src/assets/gestionplatoverview2.png)

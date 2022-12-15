@@ -1,4 +1,4 @@
-import error from "../../../public/assets/error.png"
+import error from "../../assets/error.png"
 import {ActionButton} from "../buttons/ActionButton";
 
 export const ErrorModal = ({modalState, action, errorMessage}) => {

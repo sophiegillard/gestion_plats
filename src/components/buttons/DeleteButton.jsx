@@ -1,4 +1,4 @@
-import trash from "../../../public/assets/delete.png"
+import trash from "../../assets/delete.png"
 
 export const DeleteButton = ({ action, showDeleteButton }) =>{
 

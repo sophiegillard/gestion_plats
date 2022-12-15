@@ -1,11 +1,12 @@
-import last from "../../../../public/assets/last.png"
-import first from "../../../../public/assets/first.png"
-import next from "../../../../public/assets/next.png"
-import back from "../../../../public/assets/back.png"
+import last from "../../../assets/last.png"
+import first from "../../../assets/first.png"
+import next from "../../../assets/next.png"
+import back from "../../../assets/back.png"
 import {useEffect, useState} from "react";
 import {PaginationButton} from "../../buttons/PaginationButton.jsx";
 import {fetchDatas} from "../../../utils/fetchDatas.js";
 import axios from "axios";
+import {port, setUrlAllDatas, setUrlCurrentPage} from "../../../../setUrl.js";
 
 
 export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButton}) =>{
@@ -13,7 +14,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
 
 
     useEffect(() => {
-        const url= `http://localhost:8888/api/allDatas.php`;
+        const url= setUrlAllDatas(port);
         axios.get(url)
             .then(function (response) {
                 const result = response.data
@@ -29,7 +30,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
 
     const setLastPage = () =>{
         setPageNumber(lastPage);
-        const url= `http://localhost:8888/api/index.php?currentPage=${lastPage}`;
+        const url= setUrlCurrentPage(port, lastPage);
         fetchDatas (setDatas,url);
         setDeleteButton('hidden')}
 
@@ -38,7 +39,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
         if(pageNumber !== lastPage){
             const updatedPageNumber = pageNumber + 1
             setPageNumber(updatedPageNumber)
-            const url= `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
+            const url= setUrlCurrentPage(port, updatedPageNumber);
             fetchDatas (setDatas,url);
             setDeleteButton('hidden');}
     }
@@ -47,7 +48,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
         if (pageNumber !== 1) {
             const updatedPageNumber = pageNumber - 1
             setPageNumber(updatedPageNumber)
-            const url = `http://localhost:8888/api/index.php?currentPage=${updatedPageNumber}`;
+            const url = setUrlCurrentPage(port, updatedPageNumber);
             fetchDatas(setDatas, url)
             setDeleteButton('hidden');
         }
@@ -55,7 +56,7 @@ export const ModalFooter = ({pageNumber, setPageNumber, setDatas, setDeleteButto
 
     const setFirstPage = () =>{
         setPageNumber(1)
-        const url= `http://localhost:8888/api/index.php?currentPage=1`;
+        const url= setUrlCurrentPage(port, 1);
         fetchDatas (setDatas,url)
         setDeleteButton('hidden');
     }
