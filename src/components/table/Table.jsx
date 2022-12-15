@@ -1,5 +1,5 @@
-import add from "../../../public/assets/add.png"
-import logo from "../../../public/assets/logo.png";
+import add from "../../assets/add.png"
+import logo from "../../assets/logo.png";
 import {Link} from "react-router-dom";
 import {useState, useEffect} from "react";
 import { fetchDatas } from "../../utils/fetchDatas.js";

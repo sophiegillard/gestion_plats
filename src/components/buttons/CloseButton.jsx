@@ -1,4 +1,4 @@
-import close from "../../../public/assets/close.png";
+import close from "../../assets/close.png";
 
 export const CloseButton = ({onClickAction}) =>{
 

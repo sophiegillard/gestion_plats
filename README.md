@@ -51,5 +51,5 @@ A page to handle providers and categories could be added.
 
 
 ## Overview of the project
-![Overview1](public/assets/gestionplatoverview1.png)
-![Overview2](public/assets/gestionplatoverview2.png)
+![Overview1](src/assets/gestionplatoverview1.png)
+![Overview2](src/assets/gestionplatoverview2.png)

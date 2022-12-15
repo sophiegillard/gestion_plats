@@ -1,7 +1,7 @@
-import last from "../../../../public/assets/last.png"
-import first from "../../../../public/assets/first.png"
-import next from "../../../../public/assets/next.png"
-import back from "../../../../public/assets/back.png"
+import last from "../../../assets/last.png"
+import first from "../../../assets/first.png"
+import next from "../../../assets/next.png"
+import back from "../../../assets/back.png"
 import {useEffect, useState} from "react";
 import {PaginationButton} from "../../buttons/PaginationButton.jsx";
 import {fetchDatas} from "../../../utils/fetchDatas.js";

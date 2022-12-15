@@ -1,4 +1,4 @@
-import success from "../../../public/assets/success.png"
+import success from "../../assets/success.png"
 import {ActionButton} from "../buttons/ActionButton";
 
 export const SuccessModal = ({modalState, action, successMessage}) => {
