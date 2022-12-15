@@ -42,7 +42,7 @@ Front-end was realized with React and Tailwind.
 
 ## Context
 This project has been realized on December 2022 while I was doing a 7-month boot camp.
-This project aim to test my abilities in doing a full stack project.
+This project aims to test my abilities in doing a full stack project.
 
 ## What's to improve?
 There is no searchbar so far. 

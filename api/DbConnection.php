@@ -6,8 +6,8 @@
         public function connect(){
         $host = 'localhost';
         $dbname = 'schoolDish';
-        $username = 'sophro';
-        $password = '123';
+        $username = '';
+        $password = '';
 
 
         try {
