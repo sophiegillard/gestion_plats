@@ -38,7 +38,7 @@ Front-end was realized with React and Tailwind.
   - In MySql create a table named "schoolDish"
   - In this new table, import the sql request from 'DB_schoolDish'
   - In the document api/DbConnection set your username and password
-  - In the file 'setUrl.js' change to port to your mysql port.
+  - In the file 'setUrl.js' change the port to your mysql port.
 
 ## Context
 This project has been realized on December 2022 while I was doing a 7-month boot camp.
