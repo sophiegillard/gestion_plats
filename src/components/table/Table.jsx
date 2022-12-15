@@ -96,7 +96,7 @@ export const Table = () =>{
                             </div>
                         </div>
 
-                        <div className="table-row-group flex justify-between">
+                        <div className="table-row-group justify-between">
                             {datas.map((data)=>
                                 <div key={data.id} id={data.id} className="table-row row-content border-b-2 border-gray-200 max-sm:h-16">
 
