@@ -1,6 +1,7 @@
 import axios from "axios";
 import {isCheckbox} from "./isCheckbox.js";
 import {fetchDatas} from "./fetchDatas.js";
+import {port, setUrlCurrentPage, setUrlId} from "../../setUrl.js";
 
 export const deleteDataByID = async ({setDatas, pageNumber}, e) => {
     e.preventDefault();
@@ -10,11 +11,12 @@ export const deleteDataByID = async ({setDatas, pageNumber}, e) => {
 
         // Delete each item
         for (const id of arrayIds) {
-            await axios.delete(`/api/index.php/${id}`);
+            const urlId= setUrlId(port, id)
+            await axios.delete(urlId);
         }
 
         // Fetch updated data from the API
-        const url = `/api/index.php?currentPage=${pageNumber}`;
+        const url = setUrlCurrentPage(port, pageNumber);
         fetchDatas(setDatas, url);
     } catch (error) {
         // Display an error message to the user

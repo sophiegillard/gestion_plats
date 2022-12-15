@@ -11,6 +11,7 @@ import {ErrorModal} from "./ErrorModal.jsx";
 import {TextInputEdit} from "./EditFormComponent/TextInputEdit.jsx";
 import {SelectInputEdit} from "./EditFormComponent/SelectInputEdit.jsx";
 import {NumberInputEdit} from "./EditFormComponent/NumberInputEdit.jsx";
+import {port, setUrlCategory, setUrlCurrentPage, setUrlFournisseur, setUrlIdUpdate} from "../../../setUrl.js";
 
 export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas, pageNumber}) =>{
 
@@ -22,8 +23,8 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
 
 
     useEffect(() => {
-        fetchDatas (setCategories,'/api/category.php');
-        fetchDatas (setFournisseurs, '/api/fournisseur.php');
+        fetchDatas (setCategories,setUrlCategory(port));
+        fetchDatas (setFournisseurs, setUrlFournisseur(port));
         setEditModal(false)
     }, []);
 
@@ -32,14 +33,13 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
         e.preventDefault();
         const id = theDish.id;
         const updatedDish = {id, libellee, categorie, fournisseur, prix}
-
+        const urlUpdate = setUrlIdUpdate(port, id)
 
         updateDish(setDatas, datas, id, updatedDish)
 
-        axios.put(`/api/index.php/${id}/update`, updatedDish)
+        axios.put(urlUpdate, updatedDish)
             .then(function(response){
-                console.log(response)
-                const url= `/api/index.php?currentPage=${pageNumber}`
+                const url= setUrlCurrentPage(port, pageNumber)
                 fetchDatas (setDatas,url);
                 setSuccessUpdateModal(true)
                 setEditModal(false)
@@ -193,7 +193,6 @@ export const EditDishModal = ({editModal, setEditModal, theDish, setDatas, datas
                                     if (isValid) {
                                         e.preventDefault()
                                         handleSubmitEdit(e, values.dishName, values.dishCat, values.dishProvider, values.dishPrice);
-                                        resetForm()
                                     }else{
                                         e.preventDefault()
                                         setErrorMessageEdit(true)

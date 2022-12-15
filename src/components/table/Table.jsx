@@ -11,6 +11,7 @@ import {DishRow} from "./DishRow.jsx";
 import {handleCheckboxChange} from "../../utils/handleCheckboxChange.js";
 import {ModalFooter} from "../modal/modalComponents/ModalFooter.jsx";
 import {AddDishModal} from "../modal/AddDishModal.jsx";
+import {port, setUrlCurrentPage} from "../../../setUrl.js"
 
 export const Table = () =>{
     const [datas, setDatas] = useState([])
@@ -22,7 +23,7 @@ export const Table = () =>{
     let checkIfCheckBoxAreCheck = isCheckbox();
      
     useEffect(() => {
-        const url= `/api/index.php?currentPage=${pageNumber}`;
+        const url= setUrlCurrentPage(port, pageNumber);
         fetchDatas (setDatas,url);
     }, []);
 
