@@ -32,6 +32,7 @@ Front-end was realized with React and Tailwind.
   - npm install
   - npm run dev
   - npx tailwindcss -i ./src/style/index.css -o ./src/dist/output.css --watch
+  - composer install
 
 - For the database: 
   - Download the db file 'DB_schoolDish' 
